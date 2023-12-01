@@ -1,0 +1,33 @@
+In addition, as I once shared with Knighttime, I typically follow some pre-established steps when designing a new scenario.
+
+Step One: Define my Goal and Vision. 
+For me it is very important to clearly define, at a high level, from the very beginning what’s my goal. What I’m I trying to reproduce or achieve?
+
+In the case of my Napoléon scenario, for example, my goal was to reproduce the Napoleonic Wars in Europe between the major belligerents of the time from August 1805 to September 1815 (starting from the War of the Third Coalition all the way to the Empire’s final downfall).
+
+My vision was that I didn’t want it to be a typical Civ 2 conquest game, where the French human player would attack one enemy nation, conquer its cities and use those same cities to build additional forces to attack the next target, until all its adversaries were defeated. France would have to rely on its own manpower resources, alongside those of its minor power allies, to establish its dominance on the continent.
+
+Step Two: Follow a semi PROJECT PLAN:
+
+1.Scenario Research = To Do
+2.Unit selections = To Do
+3.Wonders and City Improvements selections = To Do
+4.Technological advances selections = To Do
+5.Terrain, cities, improvements, wonders, units graphics selection = To Do
+6.Tech Tree creation = To Do
+7.Rules.txt file creation = To Do
+8.Selecting and adding sounds to scenario = To Do
+9.Map creation = To Do
+10.Convert the map file (.mp) into a scenario file (.scn) = To Do
+11.Set the scenario parameters = To Do
+12.Cities placement, for each power, on map (city sizes, city improvements, etc) = To Do
+13.Road, mines, irrigation, labels, etc, placement on map = To Do
+14.Event file creation = To Do
+15.Units placement on map = To Do
+16.Setting up cities production build queues and possible trade routes = To Do
+17.Testing = To Do
+18.ReadMe creation = To Do
+
+Steps 1 to 18 are not set in stone but used as a guideline and a reminder of all the tasks that need to be completed.
+
+I hope this helps.

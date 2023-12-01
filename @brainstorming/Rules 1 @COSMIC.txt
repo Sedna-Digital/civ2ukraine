@@ -36,7 +36,18 @@
 @COSMIC2
 EventHeapSize, 106480, 1
 MovementMultipliers, 0
-RailroadMultiplier, 2
+RailroadMultiplier, 1, 2
 RiverMultiplier, 0
 AlpineMultiplier, 0
 NumberOfUnitTypes, 189
+City population loss, 2
+No stack kills, 1
+Navigable rivers, 1
+CitySpritesPerTribe, 0
+BarbOffensiveUnitLimit, 32
+BarbUnitSupport, 1
+BarbResearch, 1
+PlayableTribes, 0b11111110
+PlayableDifficulties, 0b100000
+					
+-- NOTE: WILL BE ENABLED

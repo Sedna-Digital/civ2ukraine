@@ -1,39 +1,39 @@
-@IMPROVE						@UKRAINE		Special effect to remember
-Nothing,                  1,  0,    nil,	>	Nothing
-Palace,                   10, 0,    Mas,	>	Government Center
-Barracks,                 4,  1,    nil,	>	Military Academy
-Granary,                  6,  1,    Pot,	>	Grain Silo			Useless with Pyramid (Oblasts)
-Temple,                   4,  1,    Cer,	>	Hospital			Double with: Oracle (Red Cross)
-MarketPlace,              8,  1,    Cur,	> 	MarketPlace
-Library,                  8,  1,    Wri,	>	School
-Courthouse,               8,  1,    CoL,	>	Tribunal
-City Walls,               8,  0,    Mas,	>	Defense Perimeter
-Aqueduct,                 8,  2,    Cst,	> 	Permit for Village
-Bank,                     12, 3,    Ban,	>	Mall
-Cathedral,                12, 3,    MT,		>	Music Arena			Useless with Michaelangelo (Bolshoi)
-University,               16, 3,    Uni,	> 	University
-Mass Transit,             16, 4,    MP,		>	Public Transport
-Colosseum,                10, 4,    Cst,	>	Football Stadium		(x2 with electricity)
-Factory,                  20, 4,    Ind,	>	Ammo Factory
-Manufacturing Plant,      32, 6,    Rob,	>	Weapons Factory
-SDI Defense,              20, 4,    Las,	>	Anti Missile Battery
-Recycling Center,         20, 2,    Rec,	> 	Recycling Center
-Power Plant,              16, 4,    Ref,	>	Armored Factory
-Hydro Plant,              24, 4,    E2,		>	Missile Factory
-Nuclear Plant,            16, 2,    NP,		>	Aircraft Factory
-Stock Exchange,           16, 4,    Eco,	>	Bank
-Sewer System,             12, 2,    San,	>	Permit for City
-Supermarket,               8, 3,    Rfg,	>	Food Distribution Center
-Superhighways,            20, 5,    Aut,	>	Highways
-Research Lab,             16, 3,    Cmp,	>	VR Research Lab			Everywhere with SETI (FoldingAtHome)
-SAM Missile Battery,      10, 2,    Roc,	>	SAM Defense System
-Coastal Fortress,          8, 1,    Met,	>	Coastal Defense Battery
-Solar Plant,              32, 4,    Env,	>	Military GigaFactory		HOOVER DAM: ONLY
-Harbor,                   6,  1,    Sea,	> 	Fishing Portttt	
-Offshore Platform,        16, 3,    Min,	>	Maritime Resource
-Airport,                  16, 3,    Rad,	> 	FOA (Forward perating Airfield) / Tactical airstrip
-Police Station,           6,  2,    Cmn,	>	Conscription Center
-Port Facility,            8,  3,    Amp,	> 	Shipyard
+@IMPROVE						@UKRAINE					Special effect to remember
+Nothing,                  1,  0,    nil,	00000000,	>	Nothing
+Palace,                   10, 0,    Mas,	00000010,	>	Government Center
+Barracks,                 4,  1,    nil,	00000010,	>	Military Academy
+Granary,                  6,  1,    Pot,	00000010,	>	Grain Silo			Useless with Pyramid (Oblasts)
+Temple,                   4,  1,    Cer,	00000010,	>	Hospital			Double with: Oracle (Red Cross)
+MarketPlace,              8,  1,    Cur,	00000010,	> 	MarketPlace
+Library,                  8,  1,    Wri,	00000010,	>	School
+Courthouse,               8,  1,    CoL,	00000010,	>	Tribunal
+City Walls,               8,  0,    Mas,	00000010,	>	Defense Perimeter
+Aqueduct,                 8,  2,    Cst,	00000001,	> 	Permit for Village
+Bank,                     12, 3,    Ban,	00000010,	>	Mall
+Cathedral,                12, 3,    MT,		00000010,	>	Music Arena			Useless with Michaelangelo (Bolshoi)
+University,               16, 3,    Uni,	00000010,	> 	University
+Mass Transit,             16, 4,    MP,		00000010,	>	Public Transport
+Colosseum,                10, 4,    Cst,	00000010,	>	Football Stadium		(x2 with electricity)
+Factory,                  20, 4,    Ind,	00000001,	>	Ammo Factory
+Manufacturing Plant,      32, 6,    Rob,	00000001,	>	Weapons Factory
+SDI Defense,              20, 4,    Las,	00000010,	>	Anti Missile Battery
+Recycling Center,         20, 2,    Rec,	00000010,	> 	Recycling Center
+Power Plant,              16, 4,    Ref,	00000001,	>	Armored Factory
+Hydro Plant,              24, 4,    E2,		00000001,	>	Missile Factory
+Nuclear Plant,            16, 2,    NP,		00000001,	>	Aircraft Factory
+Stock Exchange,           16, 4,    Eco,	00000010,	>	Bank
+Sewer System,             12, 2,    San,	00000010,	>	Permit for City
+Supermarket,               8, 3,    Rfg,	00000010,	>	Food Distribution Center
+Superhighways,            20, 5,    Aut,	00000010,	>	Highways
+Research Lab,             16, 3,    Cmp,	00000010,	>	VR Research Lab			Everywhere with SETI (FoldingAtHome)
+SAM Missile Battery,      10, 2,    Roc,	00000010,	>	SAM Defense System
+Coastal Fortress,          8, 1,    Met,	00000010,	>	Coastal Defense Battery
+Solar Plant,              32, 4,    Env,	00000010,	>	Military GigaFactory		HOOVER DAM: ONLY
+Harbor,                   6,  1,    Sea,	00000010,	> 	Fishing Portttt	
+Offshore Platform,        16, 3,    Min,	00000010,	>	Maritime Resource
+Airport,                  16, 3,    Rad,	00000010,	> 	Tactical airstrip
+Police Station,           6,  2,    Cmn,	00000010,	>	Conscription Center
+Port Facility,            8,  3,    Amp,	00000010,	> 	Shipyard
 Transporter,              0,  0,    no,
 SS Structural,            8,  0,    SFl,
 SS Component,             16, 0,    Pla,
