@@ -1,0 +1,102 @@
+@IMPROVE						@UKRAINE		Special effect to remember
+Nothing,                  1,  0,    nil,	>	Nothing
+Palace,                   10, 0,    Mas,	>	Government Center
+Barracks,                 4,  1,    nil,	>	Military Academy
+Granary,                  6,  1,    Pot,	>	Grain Silo			Useless with Pyramid (Oblasts)
+Temple,                   4,  1,    Cer,	>	Hospital			Double with: Oracle (Red Cross)
+MarketPlace,              8,  1,    Cur,	> 	MarketPlace
+Library,                  8,  1,    Wri,	>	School
+Courthouse,               8,  1,    CoL,	>	Tribunal
+City Walls,               8,  0,    Mas,	>	Defense Perimeter
+Aqueduct,                 8,  2,    Cst,	> 	Permit for Village
+Bank,                     12, 3,    Ban,	>	Mall
+Cathedral,                12, 3,    MT,		>	Music Arena			Useless with Michaelangelo (Bolshoi)
+University,               16, 3,    Uni,	> 	University
+Mass Transit,             16, 4,    MP,		>	Public Transport
+Colosseum,                10, 4,    Cst,	>	Football Stadium		(x2 with electricity)
+Factory,                  20, 4,    Ind,	>	Ammo Factory
+Manufacturing Plant,      32, 6,    Rob,	>	Weapons Factory
+SDI Defense,              20, 4,    Las,	>	Anti Missile Battery
+Recycling Center,         20, 2,    Rec,	> 	Recycling Center
+Power Plant,              16, 4,    Ref,	>	Armored Factory
+Hydro Plant,              24, 4,    E2,		>	Missile Factory
+Nuclear Plant,            16, 2,    NP,		>	Aircraft Factory
+Stock Exchange,           16, 4,    Eco,	>	Bank
+Sewer System,             12, 2,    San,	>	Permit for City
+Supermarket,               8, 3,    Rfg,	>	Food Distribution Center
+Superhighways,            20, 5,    Aut,	>	Highways
+Research Lab,             16, 3,    Cmp,	>	VR Research Lab			Everywhere with SETI (FoldingAtHome)
+SAM Missile Battery,      10, 2,    Roc,	>	SAM Defense System
+Coastal Fortress,          8, 1,    Met,	>	Coastal Defense Battery
+Solar Plant,              32, 4,    Env,	>	Military GigaFactory		HOOVER DAM: ONLY
+Harbor,                   6,  1,    Sea,	> 	Fishing Portttt	
+Offshore Platform,        16, 3,    Min,	>	Maritime Resource
+Airport,                  16, 3,    Rad,	> 	FOA (Forward perating Airfield) / Tactical airstrip
+Police Station,           6,  2,    Cmn,	>	Conscription Center
+Port Facility,            8,  3,    Amp,	> 	Shipyard
+Transporter,              0,  0,    no,
+SS Structural,            8,  0,    SFl,
+SS Component,             16, 0,    Pla,
+SS Module,                32, 0,    Sup,
+(Capitalization),         60, 0,    Cor,
+Pyramids,                 20, 0,    Mas,	>	Oblasts
+Hanging Gardens,          20, 0,    Pot,	>	Red Square			for Neutral only
+Colossus,                 20, 0,    Bro,	>	WholeSale Hypermarket
+Lighthouse,               20, 0,    Map,	>	Maritime Surveillance
+Great Library,            30, 0,    Lit,	>	Surveillance			To be obsolete immediately
+Oracle,                   30, 0,    Mys,	> 	Red Cross
+Great Wall,               30, 0,    Mas,	>	National Def. Perimeter		To be obsolete
+Sun Tzu's War Academy,    30, 0,    Feu,	>	Military Doctrine		To be obsolete
+King Richard's Crusade,   30, 0,    Eng,	>	Gigafactory
+Marco Polo's Embassy,     20, 0,    Tra,	>	UN seat
+Michelangelo's Chapel,    40, 0,    MT,		>	Bolshoi (music arena in all cities)	in Moscow
+Copernicus' Observatory,  30, 0,    Ast,	>	FoldingAtHome 
+Magellan's Expedition,    40, 0,    Nav,	>	Chernomorskiy Flot			in Sevastopol	
+Shakespeare's Theatre,    30, 0,    Med,	>	Free Pr0nHub
+Leonardo's Workshop,      40, 0,    Inv,	>	Repair Logistics
+J. S. Bach's Cathedral,   40, 0,    The,	>	Security Assistance
+Isaac Newton's College,   40, 0,    ToG,	>	Kurchatov Institute			in Moscow
+Adam Smith's Trading Co., 40, 0,    Eco,	>	Humanitarian Help
+Darwin's Voyage,          40, 0,    RR,		>	Intelligence Headquarters
+Statue of Liberty,        40, 0,    Dem,	>	Statue of the President
+Eiffel Tower,             30, 0,    SE,		>	Propaganda Institute
+Women's Suffrage,         60, 0,    Ind,	>	Civilian Mobilization
+Hoover Dam,               60, 0,    E2,		>	Military Mobilization
+Manhattan Project,        60, 0,    NF,		>	Hiroshima
+United Nations,           60, 0,    Cmn,	>	United Nations				in NATO
+Apollo Program,           60, 0,    SFl,	>	Mars Colony
+SETI Program,             60, 0,    Cmp,	>	Folding At Home			
+Cure for Cancer,          60, 0,    Gen,	>	Social Security
+
+;
+; Expiration advancements for Wonders of the World
+;
+@ENDWONDER
+nil,        ; Pyramids
+RR,         ; Hanging Gardens
+Fli,        ; Colossus
+Mag,        ; Lighthouse
+E1,         ; Great Library
+The,        ; Oracle
+Met,        ; Great Wall
+Mob,        ; Sun Tzu's War Academy
+Ind,        ; King Richard's Crusade
+Cmn,        ; Marco Polo's Embassy
+nil,        ; Michelangelo
+nil,        ; Copernicus
+nil,        ; Magellan
+nil,        ; Shakespeare
+Aut,        ; Da Vinci's Workshop
+nil,        ; Bach
+nil,        ; Newton
+nil,        ; Smith's Trading Co.
+nil,        ; Darwin
+nil,        ; Statue of Liberty
+nil,        ; Eiffel Tower
+nil,        ; Women's Suffrage
+nil,        ; Hoover Dam
+nil,        ; Manhattan Project
+nil,        ; United Nations
+nil,        ; Apollo
+nil,        ; SETI
+nil,        ; Cure for Cancer

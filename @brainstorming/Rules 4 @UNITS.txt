@@ -1,0 +1,277 @@
+;
+;    Unit Types
+;
+; until, domain,  move,rng,  att,def  hit,firepwr  cost,hold,  role, preq,  flags
+;
+; until       = Civ advance which renders unit obsolete
+; Move        = Movement rate (spaces per turn)
+; Range       = # of turns fuel carried (0 for non-air units)
+;
+; domain      = Movement domain of unit
+:               0 = Ground
+;               1 = Air
+;               2 = Sea
+;
+; att         = Attack factor (chance to score hit attacking)
+; def         = Defense factor (chance to score hit defending)
+; hit         = Hit points (damage x10 which can be taken before elimination)
+; firepwr     = # damage points caused per hit scored on enemy.
+;
+; cost        = Cost (# of shield rows, usually of 10 shields each)
+; hold        = # of holds on ship (for carrying units)
+;
+; role        = AI role (Generally affects the way in
+;               which computer players use the unit, but
+;               roles >= 5 will actually affect abilities
+;               of the unit)
+;               0 = Attack
+;               1 = Defend
+;               2 = Naval Superiority
+;               3 = Air Superiority
+;               4 = Sea Transport
+;               5 = Settle
+;               6 = Diplomacy
+;               7 = Trade
+;
+; preq        = Prerequisite advance
+;
+; "Flags" control special advantages & restrictions.  Not
+; all of these flags "make sense" for all types of units
+; (paradropping ships, for instance).  Nonsensical variations
+; may produce bizarre effects (or worse).  You were warned.
+;
+;   000000000000001 = Two space visibility
+;   000000000000010 = Ignore zones of control
+;   000000000000100 = Can make amphibious assaults
+;   000000000001000 = Submarine advantages/disadvantages
+;   000000000010000 = Can attack air units (fighter)
+;   000000000100000 = Ship must stay near land (trireme)
+;   000000001000000 = Negates city walls (howitzer)
+;   000000010000000 = Can carry air units (carrier)
+;   000000100000000 = Can make paradrops
+;   000001000000000 = Alpine (treats all squares as road)
+;   000010000000000 = x2 on defense versus horse (pikemen)
+;   000100000000000 = Free support for fundamentalism (fanatics)
+;   001000000000000 = Destroyed after attacking (missiles)
+;   010000000000000 = x2 on defense versus air (AEGIS)
+;   100000000000000 = Unit can spot submarines
+;
+;
+@UNITS
+Settlers,     Exp, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, nil, 000000000000000 ; 0
+Engineers,    nil, 0,  2.,0,  0a,2d,  2h,1f,  4,0,  5, Exp, 000000000000000 ; 1
+Warriors,     Feu, 0,  1.,0,  1a,1d,  1h,1f,  1,0,  1, nil, 000000000000000 ; 2
+Phalanx,      Feu, 0,  1.,0,  1a,2d,  1h,1f,  2,0,  1, Bro, 000000000000000 ; 3
+Archers,      Gun, 0,  1.,0,  3a,2d,  1h,1f,  3,0,  1, War, 000000000000000 ; 4
+Legion,       Gun, 0,  1.,0,  4a,2d,  1h,1f,  4,0,  1, Iro, 000000000000000 ; 5
+Pikemen,      Gun, 0,  1.,0,  1a,2d,  1h,1f,  2,0,  1, Feu, 000010000000000 ; 6
+Musketeers,   Csc, 0,  1.,0,  3a,3d,  2h,1f,  3,0,  1, Gun, 000000000000000 ; 7
+Fanatics,     nil, 0,  1.,0,  4a,4d,  2h,1f,  2,0,  1, Fun, 000100000000000 ; 8
+Partisans,    nil, 0,  1.,0,  4a,4d,  2h,1f,  5,0,  1, Gue, 000001000000010 ; 9
+Alpine Troops,nil, 0,  1.,0,  5a,5d,  2h,1f,  5,0,  1, Tac, 000001000000000 ; 10
+Riflemen,     nil, 0,  1.,0,  5a,4d,  2h,1f,  4,0,  1, Csc, 000000000000000 ; 11
+Marines,      nil, 0,  1.,0,  8a,5d,  2h,1f,  6,0,  0, Amp, 000000000000100 ; 12
+Paratroopers, nil, 0,  1.,0,  6a,4d,  2h,1f,  6,0,  1, CA,  000000100000000 ; 13
+Mech. Inf.,   nil, 0,  3.,0,  6a,6d,  3h,1f,  5,0,  1, Lab, 000000000000000 ; 14
+Horsemen,     Chi, 0,  2.,0,  2a,1d,  1h,1f,  2,0,  0, Hor, 000000000000000 ; 15
+Chariot,      PT,  0,  2.,0,  3a,1d,  1h,1f,  3,0,  0, Whe, 000000000000000 ; 16
+Elephant,     MT,  0,  2.,0,  4a,1d,  1h,1f,  4,0,  0, PT,  000000000000000 ; 17
+Crusaders,    Ldr, 0,  2.,0,  5a,1d,  1h,1f,  4,0,  0, MT,  000000000000000 ; 18
+Knights,      Ldr, 0,  2.,0,  4a,2d,  1h,1f,  4,0,  0, Chi, 000000000000000 ; 19
+Dragoons,     Tac, 0,  2.,0,  5a,2d,  2h,1f,  5,0,  0, Ldr, 000000000000000 ; 20
+Cavalry,      Mob, 0,  2.,0,  8a,3d,  2h,1f,  6,0,  0, Tac, 000000000000000 ; 21
+Armor,        nil, 0,  3.,0, 10a,5d,  3h,1f,  8,0,  0, Mob, 000000000000000 ; 22
+Catapult,     Met, 0,  1.,0,  6a,1d,  1h,1f,  4,0,  0, Mat, 000000000000000 ; 23
+Cannon,       Too, 0,  1.,0,  8a,1d,  2h,1f,  4,0,  0, Met, 000000000000000 ; 24
+Artillery,    Rob, 0,  1.,0, 10a,1d,  2h,2f,  5,0,  0, Too, 000000000000000 ; 25
+Howitzer,     nil, 0,  2.,0, 12a,2d,  3h,2f,  7,0,  0, Rob, 000000001000000 ; 26
+Fighter,      Sth, 1, 10.,1,  4a,3d,  2h,2f,  6,0,  3, Fli, 000000000010001 ; 27
+Bomber,       Sth, 1,  8.,2, 12a,1d,  2h,2f, 12,0,  0, AFl, 000000000000001 ; 28
+Helicopter,   nil, 1,  6.,0, 10a,3d,  2h,2f, 10,0,  0, CA,  100000000000001 ; 29
+Stlth Ftr.,   nil, 1, 14.,1,  8a,4d,  2h,2f,  8,0,  3, Sth, 000000000010001 ; 30
+Stlth Bmbr.,  nil, 1, 12.,2, 14a,5d,  2h,2f, 16,0,  0, Sth, 000000000000001 ; 31
+Trireme,      Nav, 2,  3.,0,  1a,1d,  1h,1f,  4,2,  4, Map, 000000000100000 ; 32
+Caravel,      Mag, 2,  3.,0,  2a,1d,  1h,1f,  4,3,  4, Nav, 000000000000000 ; 33
+Galleon,      Ind, 2,  4.,0,  0a,2d,  2h,1f,  4,4,  4, Mag, 000000000000000 ; 34
+Frigate,      E1,  2,  4.,0,  4a,2d,  2h,1f,  5,2,  2, Mag, 000000000000000 ; 35
+Ironclad,     E1,  2,  4.,0,  4a,4d,  3h,1f,  6,0,  2, SE,  000000000000000 ; 36
+Destroyer,    nil, 2,  6.,0,  4a,4d,  3h,1f,  6,0,  2, E1,  100000000000001 ; 37
+Cruiser,      Roc, 2,  5.,0,  6a,6d,  3h,2f,  8,0,  2, Stl, 100000000000001 ; 38
+AEGIS Cruiser,nil, 2,  5.,0,  8a,8d,  3h,2f, 10,0,  2, Roc, 110000000000001 ; 39
+Battleship,   nil, 2,  4.,0, 12a,12d, 4h,2f, 16,0,  2, Aut, 000000000000001 ; 40
+Submarine,    nil, 2,  3.,0, 10a,2d,  3h,2f,  6,0,  2, Cmb, 000000000001001 ; 41
+Carrier,      nil, 2,  5.,0,  1a,9d,  4h,2f, 16,0,  2, AFl, 000000010000001 ; 42
+Transport,    nil, 2,  5.,0,  0a,3d,  3h,1f,  5,8,  4, Ind, 000000000000000 ; 43
+Cruise Msl.,  nil, 1, 12.,1, 18a,0d,  1h,3f,  6,0,  0, Roc, 001000000000000 ; 44
+Nuclear Msl., nil, 1, 16.,1, 99a,0d,  1h,1f, 16,0,  0, Roc, 001000000000000 ; 45
+Diplomat,     Esp, 0,  2.,0,  0a,0d,  1h,1f,  3,0,  6, Wri, 000000000000010 ; 46
+Spy,          nil, 0,  3.,0,  0a,0d,  1h,1f,  3,0,  6, Esp, 000000000000011 ; 47
+Caravan,      Cor, 0,  1.,0,  0a,1d,  1h,1f,  5,0,  7, Tra, 000000000000010 ; 48
+Freight,      nil, 0,  2.,0,  0a,1d,  1h,1f,  5,0,  7, Cor, 000000000000010 ; 49
+Explorer,     Gue, 0,  1.,0,  0a,1d,  1h,1f,  3,0,  0, Sea, 000001000000010 ; 50
+Extra Land,   nil, 0,  1.,0,  1a,1d,  1h,1f,  5,0,  0, no,  000000000000000 ; 51
+Extra Ship,   nil, 2,  4.,0,  4a,2d,  2h,1f,  5,1,  2, no,  000000000000000 ; 52
+Extra Air,    nil, 1,  8.,4,  8a,8d,  2h,2f, 10,0,  0, no,  000000000000000 ; 53
+New Unit 54,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 54
+New Unit 55,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 55
+New Unit 56,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 56
+New Unit 57,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 57
+New Unit 58,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 58
+New Unit 59,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 59
+New Unit 60,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 60
+New Unit 61,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 61
+New Unit 62,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 62
+New Unit 63,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 63
+New Unit 64,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 64
+New Unit 65,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 65
+New Unit 66,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 66
+New Unit 67,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 67
+New Unit 68,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 68
+New Unit 69,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 69
+New Unit 70,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 70
+New Unit 71,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 71
+New Unit 72,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 72
+New Unit 73,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 73
+New Unit 74,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 74
+New Unit 75,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 75
+New Unit 76,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 76
+New Unit 77,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 77
+New Unit 78,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 78
+New Unit 79,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 79
+New Unit 80,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 80
+New Unit 81,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 81
+New Unit 82,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 82
+New Unit 83,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 83
+New Unit 84,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 84
+New Unit 85,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 85
+New Unit 86,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 86
+New Unit 87,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 87
+New Unit 88,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 88
+New Unit 89,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 89
+New Unit 90,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 90
+New Unit 91,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 91
+New Unit 92,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 92
+New Unit 93,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 93
+New Unit 94,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 94
+New Unit 95,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 95
+New Unit 96,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 96
+New Unit 97,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 97
+New Unit 98,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 98
+New Unit 99,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 99
+New Unit 100, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 100
+New Unit 101, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 101
+New Unit 102, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 102
+New Unit 103, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 103
+New Unit 104, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 104
+New Unit 105, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 105
+New Unit 106, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 106
+New Unit 107, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 107
+New Unit 108, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 108
+New Unit 109, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 109
+New Unit 110, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 110
+New Unit 111, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 111
+New Unit 112, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 112
+New Unit 113, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 113
+New Unit 114, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 114
+New Unit 115, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 115
+New Unit 116, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 116
+New Unit 117, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 117
+New Unit 118, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 118
+New Unit 119, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 119
+New Unit 120, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 120
+New Unit 121, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 121
+New Unit 122, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 122
+New Unit 123, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 123
+New Unit 124, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 124
+New Unit 125, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 125
+New Unit 126, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 126
+New Unit 127, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 127
+New Unit 128, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 128
+New Unit 129, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 129
+New Unit 130, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 130
+New Unit 131, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 131
+New Unit 132, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 132
+New Unit 133, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 133
+New Unit 134, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 134
+New Unit 135, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 135
+New Unit 136, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 136
+New Unit 137, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 137
+New Unit 138, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 138
+New Unit 139, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 139
+New Unit 140, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 140
+New Unit 141, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 141
+New Unit 142, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 142
+New Unit 143, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 143
+New Unit 144, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 144
+New Unit 145, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 145
+New Unit 146, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 146
+New Unit 147, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 147
+New Unit 148, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 148
+New Unit 149, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 149
+New Unit 150, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 150
+New Unit 151, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 151
+New Unit 152, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 152
+New Unit 153, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 153
+New Unit 154, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 154
+New Unit 155, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 155
+New Unit 156, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 156
+New Unit 157, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 157
+New Unit 158, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 158
+New Unit 159, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 159
+New Unit 160, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 160
+New Unit 161, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 161
+New Unit 162, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 162
+New Unit 163, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 163
+New Unit 164, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 164
+New Unit 165, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 165
+New Unit 166, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 166
+New Unit 167, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 167
+New Unit 168, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 168
+New Unit 169, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 169
+New Unit 170, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 170
+New Unit 171, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 171
+New Unit 172, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 172
+New Unit 173, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 173
+New Unit 174, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 174
+New Unit 175, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 175
+New Unit 176, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 176
+New Unit 177, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 177
+New Unit 178, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 178
+New Unit 179, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 179
+New Unit 180, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 180
+New Unit 181, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 181
+New Unit 182, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 182
+New Unit 183, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 183
+New Unit 184, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 184
+New Unit 185, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 185
+New Unit 186, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 186
+New Unit 187, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 187
+New Unit 188, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 188
+
+
+
+;
+; Note: the above 11 unit types (extra land, ship, air, and test units) are 
+; available for user defined unit types.  If these units are given prerequisites
+; other than "no" they will appear in the game when the specified
+; technology is reached.  Use if you want to create your own unit types
+; without sacrificing any of the predefined units.  Be sure to define
+; the "role" field accurately, so that the computer will understand how
+; to make use of the new units in its own civilizations.
+;
+; There is no requirement that the extra units be used to
+; create exactly one of each type; you could create three
+; ground units.  But the icons provided are for one of each.
+; The 11 extra unit types have default icons provided by the game.
+; To actually change the icons is a somewhat more difficult
+; task.  The icons are stored in "UNITS.GIF".
+;
+; Sound effects for these 11 units may be added by providing
+; CUSTOM1.WAV, CUSTOM2.WAV, and CUSTOM3.WAV for the extra units and
+: Extra1.wav through extra8.wav for the 8 test units.  These should be
+; 8-bit, mono, and sampled at 22050hz.
+;
+; Ideas:
+;
+; Hovercraft,   nil, 2,  8.,0,  0a,1d,  2h,2f,  7,1,  4, MP,  000000000000000
+;

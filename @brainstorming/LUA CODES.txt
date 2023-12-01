@@ -1,0 +1,31 @@
+-- =========================================
+-- IF FORTIFIED, CANT MOVE WHEN UNFORTIFYING
+-- =========================================
+-- the idea is that SAM, logistic units etc need to pack and unpack. A unit going out of fortification state should need a turn. Also, if applied to the whole scenario, it would make fortifying a more important decision. It would also remove the opportunity to attack by surprise when the ennemy makes a blunder move if they cannot unfortify and attack right away. That means keeping a unit non fortified is a strategic decision too
+-- =========================================
+
+discreteEvents.onActivateUnit(function(unit,source,repeatMove)
+    if gen.isFortified(unit) then
+        unit.moveSpent = 255
+    end
+end)
+
+-- ========================================
+-- credit: Prof. Garfield - NOTE: TO BE TESTED
+-- ========================================
+
+==============================================================================
+
+about wonders and buildings
+
+They're hard coded, and so will always take effect*. However, if something can be achieved by Lua (and a lot of things can), you can condition that effect on whether a city/tribe has a certain improvement or wonder, and thereby enhance the effect.
+
+*Lua/TOTPP can change a couple things, like the defense bonus for city walls.
+
+
+Stopping a fight before unit is destroyed?
+Yes, that can be changed in combatSettings.lua in the template now. (Prof Garfield)
+
+If you want to stop units from healing each turn, gen.setMoved can be used to make sure that units that skip their turn still do not get their automatic heal if they don't qualify for it.
+
+I believe all this is possible. I think we can control everything about combat now (even letting both units survive). The combatSettings.lua and registerCombatModifiers.lua files in the template are relevant here.

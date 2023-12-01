@@ -1,0 +1,1611 @@
+;
+;   CIVILIZATION GAME DATA 8/6/98
+;   Copyright (c) 1995 by MicroProse Software
+;
+;   This file can be altered at your own risk to change
+;   the rules of the game.  Keep in mind that altering the
+;   contents of this file may cause your game to malfunction,
+;   particularly if you use values outside the specified
+;   ranges.
+;
+
+;	
+;   Cosmic Principles - TOTPP v0.184
+;
+;   The following numbers control various key rules
+;   of the game.  GREAT discretion is advised if you
+;   opt to change these.  Values too far out of the
+;   expected range can cause the game to behave strangely.
+;   All values entered in rules.txt are bounded by +/-127. 
+;   However, this does not mean that all numbers within this 
+;   range will work properly, for example, unit costs must 
+;   not exceed 17.
+;
+@COSMIC
+3       ; Road movement multiplier
+2       ; 1 in x chance Trireme lost (mod. by Seafaring, Navigation)
+2       ; # of food each citizen eats per turn
+10      ; # of rows in food box (rows * city_size+1 = box)
+10      ; # of rows in shield box
+1       ; Settlers eat (govt <= Monarchy)
+2       ; Settlers eat (govt >= Communism)
+7       ; City size for first unhappiness at Chieftain level
+14      ; Riot factor based on # cities (higher factor lessens the effect)
+8       ; Aqueduct needed to exceed this size
+12      ; Sewer System needed to exceed this size
+10      ; Tech paradigm (higher # slows research)
+20      ; Base time for engineers to transform terrain (x2)
+3       ; Monarchy  pays support for all units past this (max 8)
+3       ; Communism pays support for all units past this (max 8)
+8       ; Fundamentalism pays support for all units past this (max 8)
+0       ; Communism is equivalent of this palace distance.
+50      ; Fundamentalism loses this % of science
+50      ; Percent shield penalty for production type change
+10      ; Max paradrop range
+75      ; Mass/Thrust paradigm (increasing slows spaceship time)
+5       ; Max effective science rate in fundamentalism (x10, so 5 = 50%)
+1	; Value of each citizen to the Civilization Score.
+20	; Value of each wonder to the Civilization Score.
+1	; Reward for landing on A. Centauri first = this multiplier*(# of habitats)*(prob. of success) 
+-10	; Cost to Civilization Score (+ or -) for each extant non-AI controlled polluted tile. 
+1	; For each turn of peace after turn 199, this amount *3 is added to Civilization Score.
+5	; Value to the Civilization Score of each future tech researched.
+0	; Penalty assessed to Civilization Score each time player betrays another race.
+0	; Cost to Civilization Score (+ or -) for each unit destroyed.
+11110111	; bitmask for goodie huts, right bit =map0, 0=no goodie huts
+0    ; Helicopters pick up huts 0=no 1=yes
+
+
+@COSMIC2
+EventHeapSize, 106480, 1
+MovementMultipliers, 0
+RailroadMultiplier, 0
+RiverMultiplier, 0
+AlpineMultiplier, 0
+NumberOfUnitTypes, 189
+
+
+;
+;   Civilization Advances
+;
+;   Ai Value, Civilized Modifier, Preq1, Preq2, Epoch, Category
+;
+;     Ai Value = Basic value at which computer players
+;                view this advance (used in determining
+;                which discovery to pursue, which to
+;                acquire during exchanges, and value of
+;                gift during diplomacy).
+;     Modifier = Modifier to value based on the "civilized"
+;                aspect of a leader's personality.  Positive
+;                values increase value for civilized leaders,
+;                decrease it for militaristic.  Negative
+;                values vice versa.
+;     preq1, preq2 = Prerequisites
+;
+;     Epoch = historical period
+;             0 = Ancient
+;             1 = Renaissance
+;             2 = Industrial Revolution
+;             3 = Modern
+;
+;     Category = Knowledge category
+;             0 = Military
+;             1 = Economic
+;             2 = Social
+;             3 = Academic
+;             4 = Applied
+;
+@CIVILIZE
+Advanced Flight,    4,-2,  Rad, Too, 3, 4    ; AFl 0
+Alphabet,           5, 1,  nil, nil, 0, 3    ; Alp 1
+Amphibious Warfare, 3,-2,  Nav, Tac, 3, 0    ; Amp 2
+Astronomy,          4, 1,  Mys, Mat, 1, 3    ; Ast 3
+Atomic Theory,      4,-1,  ToG, Phy, 2, 3    ; Ato 4
+Automobile,         6,-1,  Cmb, Stl, 3, 4    ; Aut 5
+Banking,            4, 1,  Tra, Rep, 1, 1    ; Ban 6
+Bridge Building,    4, 0,  Iro, Cst, 0, 4    ; Bri 7
+Bronze Working,     6,-1,  nil, nil, 0, 4    ; Bro 8
+Ceremonial Burial,  5, 0,  nil, nil, 0, 2    ; Cer 9
+Chemistry,          5,-1,  Uni, Med, 1, 3    ; Che 10
+Chivalry,           4,-2,  Feu, Hor, 1, 0    ; Chi 11
+Code of Laws,       4, 1,  Alp, nil, 0, 2    ; CoL 12
+Combined Arms,      5,-1,  Mob, AFl, 3, 0    ; CA  13
+Combustion,         5,-1,  Ref, Exp, 2, 4    ; Cmb 14
+Communism,          5, 0,  Phi, Ind, 2, 2    ; Cmn 15
+Computers,          4, 1,  Min, MP,  3, 4    ; Cmp 16
+Conscription,       7,-1,  Dem, Met, 2, 0    ; Csc 17
+Construction,       4, 0,  Mas, Cur, 0, 4    ; Cst 18
+Corporation,        4, 0,  Ind, Eco, 2, 1    ; Cor 19 
+Currency,           4, 1,  Bro, nil, 0, 1    ; Cur 20
+Democracy,          5, 1,  Ban, Inv, 2, 2    ; Dem 21
+Economics,          4, 1,  Uni, Ban, 2, 1    ; Eco 22
+Electricity,        4, 0,  Met, Mag, 2, 4    ; E1  23
+Electronics,        4, 1,  E1,  Cor, 3, 4    ; E2  24
+Engineering,        4, 0,  Whe, Cst, 0, 4    ; Eng 25
+Environmentalism,   3, 1,  Rec, SFl, 3, 2    ; Env 26
+Espionage,          2,-1,  Cmn, Dem, 3, 0    ; Esp 27
+Explosives,         5, 0,  Gun, Che, 2, 4    ; Exp 28
+Feudalism,          4,-1,  War, Mon, 0, 0    ; Feu 29
+Flight,             4,-1,  Cmb, ToG, 2, 4    ; Fli 30 
+Fundamentalism,     3,-2,  MT,  Csc, 2, 2    ; Fun 31
+Fusion Power,       3, 0,  NP,  Sup, 3, 3    ; FP  32
+Genetic Engineering,3, 2,  Med, Cor, 3, 3    ; Gen 33
+Guerrilla Warfare,  4, 1,  Cmn, Tac, 3, 0    ; Gue 34
+Gunpowder,          8,-2,  Inv, Iro, 1, 0    ; Gun 35
+Horseback Riding,   4,-1,  nil, nil, 0, 0    ; Hor 36
+Industrialization,  6, 0,  RR,  Ban, 2, 1    ; Ind 37
+Invention,          6, 0,  Eng, Lit, 1, 4    ; Inv 38
+Iron Working,       5,-1,  Bro, War, 0, 4    ; Iro 39
+Labor Union,        4,-1,  MP,  Gue, 3, 2    ; Lab 40
+Laser,              4, 0,  NP,  MP,  3, 3    ; Las 41
+Leadership,         5,-1,  Chi, Gun, 1, 0    ; Ldr 42
+Literacy,           5, 2,  Wri, CoL, 0, 3    ; Lit 43
+Machine Tools,      4,-2,  Stl, Tac, 2, 4    ; Too 44
+Magnetism,          4,-1,  Phy, Iro, 1, 3    ; Mag 45
+Map Making,         6,-1,  Alp, nil, 0, 1    ; Map 46
+Masonry,            4, 1,  nil, nil, 0, 4    ; Mas 47
+Mass Production,    5, 0,  Aut, Cor, 3, 4    ; MP  48
+Mathematics,        4,-1,  Alp, Mas, 0, 3    ; Mat 49
+Medicine,           4, 0,  Phi, Tra, 1, 1    ; Med 50
+Metallurgy,         6,-2,  Gun, Uni, 1, 0    ; Met 51
+Miniaturization,    4, 1,  Too, E2,  3, 4    ; Min 52
+Mobile Warfare,     8,-1,  Aut, Tac, 3, 0    ; Mob 53
+Monarchy,           5, 1,  Cer, CoL, 0, 2    ; Mon 54
+Monotheism,         5, 1,  Phi, PT,  1, 2    ; MT  55
+Mysticism,          4, 0,  Cer, nil, 0, 2    ; Mys 56
+Navigation,         6,-1,  Sea, Ast, 1, 1    ; Nav 57
+Nuclear Fission,    6,-2,  Ato, MP,  3, 3    ; NF  58
+Nuclear Power,      3, 0,  NF,  E2,  3, 3    ; NP  59
+Philosophy,         6, 1,  Mys, Lit, 1, 2    ; Phi 60
+Physics,            4,-1,  Nav, Lit, 1, 3    ; Phy 61
+Plastics,           4, 1,  Ref, SFl, 3, 4    ; Pla 62
+Plumbing,           4, 0,  no,  no,  1, 4    ; Plu  (Cst & Pot) 63
+Polytheism,         4, 0,  Cer, Hor, 0, 2    ; PT  64
+Pottery,            4, 1,  nil, nil, 0, 1    ; Pot 65
+Radio,              5,-1,  Fli, E1,  3, 4    ; Rad 66
+Railroad,           6, 0,  SE, Bri,  2, 1    ; RR  67
+Recycling,          2, 1,  MP, Dem,  3, 2    ; Rec 68
+Refining,           4, 0,  Che, Cor, 2, 4    ; Ref 69
+Refrigeration,      3, 1,  E1,  San, 3, 1    ; Rfg 70
+Republic,           5, 1,  CoL, Lit, 0, 2    ; Rep 71
+Robotics,           5,-2,  Cmp, Mob, 3, 0    ; Rob 72
+Rocketry,           6,-2,  AFl, E2,  3, 0    ; Roc 73
+Sanitation,         4, 2,  Med, Eng, 2, 1    ; San 74
+Seafaring,          4, 1,  Map, Pot, 0, 1    ; Sea 75
+Space Flight,       4, 1,  Cmp, Roc, 3, 3    ; SFl 76
+Stealth,            3,-2,  Sup, Rob, 3, 0    ; Sth 77
+Steam Engine,       4,-1,  Phy, Inv, 2, 3    ; SE  78
+Steel,              4,-1,  E1,  Ind, 2, 4    ; Stl 79
+Superconductor,     4, 1,  Pla, Las, 3, 3    ; Sup 80 
+Tactics,            6,-1,  Csc, Ldr, 2, 0    ; Tac 81
+Theology,           3, 2,  MT,  Feu, 1, 2    ; The 82
+Theory of Gravity,  4, 0,  Ast, Uni, 1, 3    ; ToG 83
+Trade,              4, 2,  Cur, CoL, 0, 1    ; Tra 84
+University,         5, 1,  Mat, Phi, 1, 3    ; Uni 85
+Warrior Code,       4,-1,  nil, nil, 0, 0    ; War 86
+Wheel,              4,-1,  Hor, nil, 0, 4    ; Whe 87
+Writing,            4, 2,  Alp, nil, 0, 3    ; Wri 88
+Future Technology,  1, 0,  FP,  Rec, 3, 3    ; ... 89
+User Def Tech A,    3, 0,  no,  no,  0, 0    ; U1  90
+User Def Tech B,    3, 0,  no,  no,  0, 0    ; U2  91
+User Def Tech C,    3, 0,  no,  no,  0, 0    ; U3  92
+Extra Advance 1,    3, 0,  no,  no,  0, 0    ; X1  93
+Extra Advance 2,    3, 0,  no,  no,  0, 0    ; X2  94
+Extra Advance 3,    3, 0,  no,  no,  0, 0    ; X3  95
+Extra Advance 4,    3, 0,  no,  no,  0, 0    ; X4  96
+Extra Advance 5,    3, 0,  no,  no,  0, 0    ; X5  97
+Extra Advance 6,    3, 0,  no,  no,  0, 0    ; X6  98
+Extra Advance 7,    3, 0,  no,  no,  0, 0    ; X7  99
+Tech With ID 100,   3, 0,  no,  no,  0, 0    ; X64 100
+Tech With ID 100,   3, 0,  no,  no,  0, 0    ; X64 100
+Tech With ID 101,   3, 0,  no,  no,  0, 0    ; X65 101
+Tech With ID 102,   3, 0,  no,  no,  0, 0    ; X66 102
+Tech With ID 103,   3, 0,  no,  no,  0, 0    ; X67 103
+Tech With ID 104,   3, 0,  no,  no,  0, 0    ; X68 104
+Tech With ID 105,   3, 0,  no,  no,  0, 0    ; X69 105
+Tech With ID 106,   3, 0,  no,  no,  0, 0    ; X6A 106
+Tech With ID 107,   3, 0,  no,  no,  0, 0    ; X6B 107
+Tech With ID 108,   3, 0,  no,  no,  0, 0    ; X6C 108
+Tech With ID 109,   3, 0,  no,  no,  0, 0    ; X6D 109
+Tech With ID 110,   3, 0,  no,  no,  0, 0    ; X6E 110
+Tech With ID 111,   3, 0,  no,  no,  0, 0    ; X6F 111
+Tech With ID 112,   3, 0,  no,  no,  0, 0    ; X70 112
+Tech With ID 113,   3, 0,  no,  no,  0, 0    ; X71 113
+Tech With ID 114,   3, 0,  no,  no,  0, 0    ; X72 114
+Tech With ID 115,   3, 0,  no,  no,  0, 0    ; X73 115
+Tech With ID 116,   3, 0,  no,  no,  0, 0    ; X74 116
+Tech With ID 117,   3, 0,  no,  no,  0, 0    ; X75 117
+Tech With ID 118,   3, 0,  no,  no,  0, 0    ; X76 118
+Tech With ID 119,   3, 0,  no,  no,  0, 0    ; X77 119
+Tech With ID 120,   3, 0,  no,  no,  0, 0    ; X78 120
+Tech With ID 121,   3, 0,  no,  no,  0, 0    ; X79 121
+Tech With ID 122,   3, 0,  no,  no,  0, 0    ; X7A 122
+Tech With ID 123,   3, 0,  no,  no,  0, 0    ; X7B 123
+Tech With ID 124,   3, 0,  no,  no,  0, 0    ; X7C 124
+Tech With ID 125,   3, 0,  no,  no,  0, 0    ; X7D 125
+Tech With ID 126,   3, 0,  no,  no,  0, 0    ; X7E 126
+Tech With ID 127,   3, 0,  no,  no,  0, 0    ; X7F 127
+Tech With ID 128,   3, 0,  no,  no,  0, 0    ; X80 128
+Tech With ID 129,   3, 0,  no,  no,  0, 0    ; X81 129
+Tech With ID 130,   3, 0,  no,  no,  0, 0    ; X82 130
+Tech With ID 131,   3, 0,  no,  no,  0, 0    ; X83 131
+Tech With ID 132,   3, 0,  no,  no,  0, 0    ; X84 132
+Tech With ID 133,   3, 0,  no,  no,  0, 0    ; X85 133
+Tech With ID 134,   3, 0,  no,  no,  0, 0    ; X86 134
+Tech With ID 135,   3, 0,  no,  no,  0, 0    ; X87 135
+Tech With ID 136,   3, 0,  no,  no,  0, 0    ; X88 136
+Tech With ID 137,   3, 0,  no,  no,  0, 0    ; X89 137
+Tech With ID 138,   3, 0,  no,  no,  0, 0    ; X8A 138
+Tech With ID 139,   3, 0,  no,  no,  0, 0    ; X8B 139
+Tech With ID 140,   3, 0,  no,  no,  0, 0    ; X8C 140
+Tech With ID 141,   3, 0,  no,  no,  0, 0    ; X8D 141
+Tech With ID 142,   3, 0,  no,  no,  0, 0    ; X8E 142
+Tech With ID 143,   3, 0,  no,  no,  0, 0    ; X8F 143
+Tech With ID 144,   3, 0,  no,  no,  0, 0    ; X90 144
+Tech With ID 145,   3, 0,  no,  no,  0, 0    ; X91 145
+Tech With ID 146,   3, 0,  no,  no,  0, 0    ; X92 146
+Tech With ID 147,   3, 0,  no,  no,  0, 0    ; X93 147
+Tech With ID 148,   3, 0,  no,  no,  0, 0    ; X94 148
+Tech With ID 149,   3, 0,  no,  no,  0, 0    ; X95 149
+Tech With ID 150,   3, 0,  no,  no,  0, 0    ; X96 150
+Tech With ID 151,   3, 0,  no,  no,  0, 0    ; X97 151
+Tech With ID 152,   3, 0,  no,  no,  0, 0    ; X98 152
+Tech With ID 153,   3, 0,  no,  no,  0, 0    ; X99 153
+Tech With ID 154,   3, 0,  no,  no,  0, 0    ; X9A 154
+Tech With ID 154,   3, 0,  no,  no,  0, 0    ; X9A 154
+Tech With ID 155,   3, 0,  no,  no,  0, 0    ; X9B 155
+Tech With ID 156,   3, 0,  no,  no,  0, 0    ; X9C 156
+Tech With ID 157,   3, 0,  no,  no,  0, 0    ; X9D 157
+Tech With ID 158,   3, 0,  no,  no,  0, 0    ; X9E 158
+Tech With ID 159,   3, 0,  no,  no,  0, 0    ; X9F 159
+Tech With ID 160,   3, 0,  no,  no,  0, 0    ; XA0 160
+Tech With ID 161,   3, 0,  no,  no,  0, 0    ; XA1 161
+Tech With ID 162,   3, 0,  no,  no,  0, 0    ; XA2 162
+Tech With ID 163,   3, 0,  no,  no,  0, 0    ; XA3 163
+Tech With ID 164,   3, 0,  no,  no,  0, 0    ; XA4 164
+Tech With ID 165,   3, 0,  no,  no,  0, 0    ; XA5 165
+Tech With ID 166,   3, 0,  no,  no,  0, 0    ; XA6 166
+Tech With ID 167,   3, 0,  no,  no,  0, 0    ; XA7 167
+Tech With ID 168,   3, 0,  no,  no,  0, 0    ; XA8 168
+Tech With ID 169,   3, 0,  no,  no,  0, 0    ; XA9 169
+Tech With ID 170,   3, 0,  no,  no,  0, 0    ; XAA 170
+Tech With ID 171,   3, 0,  no,  no,  0, 0    ; XAB 171
+Tech With ID 172,   3, 0,  no,  no,  0, 0    ; XAC 172
+Tech With ID 173,   3, 0,  no,  no,  0, 0    ; XAD 173
+Tech With ID 174,   3, 0,  no,  no,  0, 0    ; XAE 174
+Tech With ID 175,   3, 0,  no,  no,  0, 0    ; XAF 175
+Tech With ID 176,   3, 0,  no,  no,  0, 0    ; XB0 176
+Tech With ID 177,   3, 0,  no,  no,  0, 0    ; XB1 177
+Tech With ID 178,   3, 0,  no,  no,  0, 0    ; XB2 178
+Tech With ID 179,   3, 0,  no,  no,  0, 0    ; XB3 179
+Tech With ID 180,   3, 0,  no,  no,  0, 0    ; XB4 180
+Tech With ID 181,   3, 0,  no,  no,  0, 0    ; XB5 181
+Tech With ID 182,   3, 0,  no,  no,  0, 0    ; XB6 182
+Tech With ID 183,   3, 0,  no,  no,  0, 0    ; XB7 183
+Tech With ID 184,   3, 0,  no,  no,  0, 0    ; XB8 184
+Tech With ID 185,   3, 0,  no,  no,  0, 0    ; XB9 185
+Tech With ID 186,   3, 0,  no,  no,  0, 0    ; XBA 186
+Tech With ID 187,   3, 0,  no,  no,  0, 0    ; XBB 187
+Tech With ID 188,   3, 0,  no,  no,  0, 0    ; XBC 188
+Tech With ID 189,   3, 0,  no,  no,  0, 0    ; XBD 189
+Tech With ID 190,   3, 0,  no,  no,  0, 0    ; XBE 190
+Tech With ID 191,   3, 0,  no,  no,  0, 0    ; XBF 191
+Tech With ID 192,   3, 0,  no,  no,  0, 0    ; XC0 192
+Tech With ID 193,   3, 0,  no,  no,  0, 0    ; XC1 193
+Tech With ID 194,   3, 0,  no,  no,  0, 0    ; XC2 194
+Tech With ID 195,   3, 0,  no,  no,  0, 0    ; XC3 195
+Tech With ID 196,   3, 0,  no,  no,  0, 0    ; XC4 196
+Tech With ID 197,   3, 0,  no,  no,  0, 0    ; XC5 197
+Tech With ID 198,   3, 0,  no,  no,  0, 0    ; XC6 198
+Tech With ID 199,   3, 0,  no,  no,  0, 0    ; XC7 199
+Tech With ID 200,   3, 0,  no,  no,  0, 0    ; XC8 200
+Tech With ID 201,   3, 0,  no,  no,  0, 0    ; XC9 201
+Tech With ID 202,   3, 0,  no,  no,  0, 0    ; XCA 202
+Tech With ID 203,   3, 0,  no,  no,  0, 0    ; XCB 203
+Tech With ID 204,   3, 0,  no,  no,  0, 0    ; XCC 204
+Tech With ID 205,   3, 0,  no,  no,  0, 0    ; XCD 205
+Tech With ID 206,   3, 0,  no,  no,  0, 0    ; XCE 206
+Tech With ID 207,   3, 0,  no,  no,  0, 0    ; XCF 207
+Tech With ID 208,   3, 0,  no,  no,  0, 0    ; XD0 208
+Tech With ID 209,   3, 0,  no,  no,  0, 0    ; XD1 209
+Tech With ID 210,   3, 0,  no,  no,  0, 0    ; XD2 210
+Tech With ID 211,   3, 0,  no,  no,  0, 0    ; XD3 211
+Tech With ID 212,   3, 0,  no,  no,  0, 0    ; XD4 212
+Tech With ID 213,   3, 0,  no,  no,  0, 0    ; XD5 213
+Tech With ID 214,   3, 0,  no,  no,  0, 0    ; XD6 214
+Tech With ID 215,   3, 0,  no,  no,  0, 0    ; XD7 215
+Tech With ID 216,   3, 0,  no,  no,  0, 0    ; XD8 216
+Tech With ID 217,   3, 0,  no,  no,  0, 0    ; XD9 217
+Tech With ID 218,   3, 0,  no,  no,  0, 0    ; XDA 218
+Tech With ID 219,   3, 0,  no,  no,  0, 0    ; XDB 219
+Tech With ID 220,   3, 0,  no,  no,  0, 0    ; XDC 220
+Tech With ID 221,   3, 0,  no,  no,  0, 0    ; XDD 221
+Tech With ID 222,   3, 0,  no,  no,  0, 0    ; XDE 222
+Tech With ID 223,   3, 0,  no,  no,  0, 0    ; XDF 223
+Tech With ID 224,   3, 0,  no,  no,  0, 0    ; XE0 224
+Tech With ID 225,   3, 0,  no,  no,  0, 0    ; XE1 225
+Tech With ID 226,   3, 0,  no,  no,  0, 0    ; XE2 226
+Tech With ID 227,   3, 0,  no,  no,  0, 0    ; XE3 227
+Tech With ID 228,   3, 0,  no,  no,  0, 0    ; XE4 228
+Tech With ID 229,   3, 0,  no,  no,  0, 0    ; XE5 229
+Tech With ID 230,   3, 0,  no,  no,  0, 0    ; XE6 230
+Tech With ID 231,   3, 0,  no,  no,  0, 0    ; XE7 231
+Tech With ID 232,   3, 0,  no,  no,  0, 0    ; XE8 232
+Tech With ID 233,   3, 0,  no,  no,  0, 0    ; XE9 233
+Tech With ID 234,   3, 0,  no,  no,  0, 0    ; XEA 234
+Tech With ID 235,   3, 0,  no,  no,  0, 0    ; XEB 235
+Tech With ID 236,   3, 0,  no,  no,  0, 0    ; XEC 236
+Tech With ID 237,   3, 0,  no,  no,  0, 0    ; XED 237
+Tech With ID 238,   3, 0,  no,  no,  0, 0    ; XEE 238
+Tech With ID 239,   3, 0,  no,  no,  0, 0    ; XEF 239
+Tech With ID 240,   3, 0,  no,  no,  0, 0    ; XF0 240
+Tech With ID 241,   3, 0,  no,  no,  0, 0    ; XF1 241
+Tech With ID 242,   3, 0,  no,  no,  0, 0    ; XF2 242
+Tech With ID 243,   3, 0,  no,  no,  0, 0    ; XF3 243
+Tech With ID 244,   3, 0,  no,  no,  0, 0    ; XF4 244
+Tech With ID 245,   3, 0,  no,  no,  0, 0    ; XF5 245
+Tech With ID 246,   3, 0,  no,  no,  0, 0    ; XF6 246
+Tech With ID 247,   3, 0,  no,  no,  0, 0    ; XF7 247
+Tech With ID 248,   3, 0,  no,  no,  0, 0    ; XF8 248
+Tech With ID 249,   3, 0,  no,  no,  0, 0    ; XF9 249
+Tech With ID 250,   3, 0,  no,  no,  0, 0    ; XFA 250
+Tech With ID 251,   3, 0,  no,  no,  0, 0    ; XFB 251
+Tech With ID 252,   3, 0,  no,  no,  0, 0    ; XFC 252
+
+;
+; Above 11 tech slots (U1 to X8) allow you to define your own 
+; civilization advances if desired.  Supply the name, the AI 
+; value, and the prerequisites.
+;
+; Then use the "U1", "U2", etc. 
+; identifier to incorporate it into the tech chain as a
+; prerequisite for other techs, units, city improvements.
+;
+
+;
+;  City Improvements
+;
+;   cost(x10), upkeep, preq
+;
+@IMPROVE
+Nothing,                  1,  0,    nil,
+Palace,                   10, 0,    Mas,
+Barracks,                 4,  1,    nil,
+Granary,                  6,  1,    Pot,
+Temple,                   4,  1,    Cer,
+MarketPlace,              8,  1,    Cur,
+Library,                  8,  1,    Wri,
+Courthouse,               8,  1,    CoL,
+City Walls,               8,  0,    Mas,
+Aqueduct,                 8,  2,    Cst,
+Bank,                     12, 3,    Ban,
+Cathedral,                12, 3,    MT,
+University,               16, 3,    Uni,
+Mass Transit,             16, 4,    MP,
+Colosseum,                10, 4,    Cst,
+Factory,                  20, 4,    Ind,
+Manufacturing Plant,      32, 6,    Rob,
+SDI Defense,              20, 4,    Las,
+Recycling Center,         20, 2,    Rec,
+Power Plant,              16, 4,    Ref,
+Hydro Plant,              24, 4,    E2,
+Nuclear Plant,            16, 2,    NP,
+Stock Exchange,           16, 4,    Eco,
+Sewer System,             12, 2,    San,
+Supermarket,               8, 3,    Rfg,
+Superhighways,            20, 5,    Aut,
+Research Lab,             16, 3,    Cmp,
+SAM Missile Battery,      10, 2,    Roc,
+Coastal Fortress,          8, 1,    Met,
+Solar Plant,              32, 4,    Env,
+Harbor,                   6,  1,    Sea,
+Offshore Platform,        16, 3,    Min,
+Airport,                  16, 3,    Rad,
+Police Station,           6,  2,    Cmn,
+Port Facility,            8,  3,    Amp,
+Transporter,              0,  0,    no,
+SS Structural,            8,  0,    SFl,
+SS Component,             16, 0,    Pla,
+SS Module,                32, 0,    Sup,
+(Capitalization),         60, 0,    Cor,
+Pyramids,                 20, 0,    Mas,
+Hanging Gardens,          20, 0,    Pot,
+Colossus,                 20, 0,    Bro,
+Lighthouse,               20, 0,    Map,
+Great Library,            30, 0,    Lit,
+Oracle,                   30, 0,    Mys,
+Great Wall,               30, 0,    Mas,
+Sun Tzu's War Academy,    30, 0,    Feu,
+King Richard's Crusade,   30, 0,    Eng,
+Marco Polo's Embassy,     20, 0,    Tra,
+Michelangelo's Chapel,    40, 0,    MT,
+Copernicus' Observatory,  30, 0,    Ast,
+Magellan's Expedition,    40, 0,    Nav,
+Shakespeare's Theatre,    30, 0,    Med,
+Leonardo's Workshop,      40, 0,    Inv,
+J. S. Bach's Cathedral,   40, 0,    The,
+Isaac Newton's College,   40, 0,    ToG,
+Adam Smith's Trading Co., 40, 0,    Eco,
+Darwin's Voyage,          40, 0,    RR,
+Statue of Liberty,        40, 0,    Dem,
+Eiffel Tower,             30, 0,    SE,
+Women's Suffrage,         60, 0,    Ind,
+Hoover Dam,               60, 0,    E2,
+Manhattan Project,        60, 0,    NF,
+United Nations,           60, 0,    Cmn,
+Apollo Program,           60, 0,    SFl,
+SETI Program,             60, 0,    Cmp,
+Cure for Cancer,          60, 0,    Gen,
+
+;
+; Expiration advancements for Wonders of the World
+;
+@ENDWONDER
+nil,        ; Pyramids
+RR,         ; Hanging Gardens
+Fli,        ; Colossus
+Mag,        ; Lighthouse
+E1,         ; Great Library
+The,        ; Oracle
+Met,        ; Great Wall
+Mob,        ; Sun Tzu's War Academy
+Ind,        ; King Richard's Crusade
+Cmn,        ; Marco Polo's Embassy
+nil,        ; Michelangelo
+nil,        ; Copernicus
+nil,        ; Magellan
+nil,        ; Shakespeare
+Aut,        ; Da Vinci's Workshop
+nil,        ; Bach
+nil,        ; Newton
+nil,        ; Smith's Trading Co.
+nil,        ; Darwin
+nil,        ; Statue of Liberty
+nil,        ; Eiffel Tower
+nil,        ; Women's Suffrage
+nil,        ; Hoover Dam
+nil,        ; Manhattan Project
+nil,        ; United Nations
+nil,        ; Apollo
+nil,        ; SETI
+nil,        ; Cure for Cancer
+
+
+;
+;    Unit Types
+;
+; until, domain,  move,rng,  att,def  hit,firepwr  cost,hold,  role, preq,  flags
+;
+; until       = Civ advance which renders unit obsolete
+; Move        = Movement rate (spaces per turn)
+; Range       = # of turns fuel carried (0 for non-air units)
+;
+; domain      = Movement domain of unit
+:               0 = Ground
+;               1 = Air
+;               2 = Sea
+;
+; att         = Attack factor (chance to score hit attacking)
+; def         = Defense factor (chance to score hit defending)
+; hit         = Hit points (damage x10 which can be taken before elimination)
+; firepwr     = # damage points caused per hit scored on enemy.
+;
+; cost        = Cost (# of shield rows, usually of 10 shields each)
+; hold        = # of holds on ship (for carrying units)
+;
+; role        = AI role (Generally affects the way in
+;               which computer players use the unit, but
+;               roles >= 5 will actually affect abilities
+;               of the unit)
+;               0 = Attack
+;               1 = Defend
+;               2 = Naval Superiority
+;               3 = Air Superiority
+;               4 = Sea Transport
+;               5 = Settle
+;               6 = Diplomacy
+;               7 = Trade
+;
+; preq        = Prerequisite advance
+;
+; "Flags" control special advantages & restrictions.  Not
+; all of these flags "make sense" for all types of units
+; (paradropping ships, for instance).  Nonsensical variations
+; may produce bizarre effects (or worse).  You were warned.
+;
+;   000000000000001 = Two space visibility
+;   000000000000010 = Ignore zones of control
+;   000000000000100 = Can make amphibious assaults
+;   000000000001000 = Submarine advantages/disadvantages
+;   000000000010000 = Can attack air units (fighter)
+;   000000000100000 = Ship must stay near land (trireme)
+;   000000001000000 = Negates city walls (howitzer)
+;   000000010000000 = Can carry air units (carrier)
+;   000000100000000 = Can make paradrops
+;   000001000000000 = Alpine (treats all squares as road)
+;   000010000000000 = x2 on defense versus horse (pikemen)
+;   000100000000000 = Free support for fundamentalism (fanatics)
+;   001000000000000 = Destroyed after attacking (missiles)
+;   010000000000000 = x2 on defense versus air (AEGIS)
+;   100000000000000 = Unit can spot submarines
+;
+;
+@UNITS
+Settlers,     Exp, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, nil, 000000000000000 ; 0
+Engineers,    nil, 0,  2.,0,  0a,2d,  2h,1f,  4,0,  5, Exp, 000000000000000 ; 1
+Warriors,     Feu, 0,  1.,0,  1a,1d,  1h,1f,  1,0,  1, nil, 000000000000000 ; 2
+Phalanx,      Feu, 0,  1.,0,  1a,2d,  1h,1f,  2,0,  1, Bro, 000000000000000 ; 3
+Archers,      Gun, 0,  1.,0,  3a,2d,  1h,1f,  3,0,  1, War, 000000000000000 ; 4
+Legion,       Gun, 0,  1.,0,  4a,2d,  1h,1f,  4,0,  1, Iro, 000000000000000 ; 5
+Pikemen,      Gun, 0,  1.,0,  1a,2d,  1h,1f,  2,0,  1, Feu, 000010000000000 ; 6
+Musketeers,   Csc, 0,  1.,0,  3a,3d,  2h,1f,  3,0,  1, Gun, 000000000000000 ; 7
+Fanatics,     nil, 0,  1.,0,  4a,4d,  2h,1f,  2,0,  1, Fun, 000100000000000 ; 8
+Partisans,    nil, 0,  1.,0,  4a,4d,  2h,1f,  5,0,  1, Gue, 000001000000010 ; 9
+Alpine Troops,nil, 0,  1.,0,  5a,5d,  2h,1f,  5,0,  1, Tac, 000001000000000 ; 10
+Riflemen,     nil, 0,  1.,0,  5a,4d,  2h,1f,  4,0,  1, Csc, 000000000000000 ; 11
+Marines,      nil, 0,  1.,0,  8a,5d,  2h,1f,  6,0,  0, Amp, 000000000000100 ; 12
+Paratroopers, nil, 0,  1.,0,  6a,4d,  2h,1f,  6,0,  1, CA,  000000100000000 ; 13
+Mech. Inf.,   nil, 0,  3.,0,  6a,6d,  3h,1f,  5,0,  1, Lab, 000000000000000 ; 14
+Horsemen,     Chi, 0,  2.,0,  2a,1d,  1h,1f,  2,0,  0, Hor, 000000000000000 ; 15
+Chariot,      PT,  0,  2.,0,  3a,1d,  1h,1f,  3,0,  0, Whe, 000000000000000 ; 16
+Elephant,     MT,  0,  2.,0,  4a,1d,  1h,1f,  4,0,  0, PT,  000000000000000 ; 17
+Crusaders,    Ldr, 0,  2.,0,  5a,1d,  1h,1f,  4,0,  0, MT,  000000000000000 ; 18
+Knights,      Ldr, 0,  2.,0,  4a,2d,  1h,1f,  4,0,  0, Chi, 000000000000000 ; 19
+Dragoons,     Tac, 0,  2.,0,  5a,2d,  2h,1f,  5,0,  0, Ldr, 000000000000000 ; 20
+Cavalry,      Mob, 0,  2.,0,  8a,3d,  2h,1f,  6,0,  0, Tac, 000000000000000 ; 21
+Armor,        nil, 0,  3.,0, 10a,5d,  3h,1f,  8,0,  0, Mob, 000000000000000 ; 22
+Catapult,     Met, 0,  1.,0,  6a,1d,  1h,1f,  4,0,  0, Mat, 000000000000000 ; 23
+Cannon,       Too, 0,  1.,0,  8a,1d,  2h,1f,  4,0,  0, Met, 000000000000000 ; 24
+Artillery,    Rob, 0,  1.,0, 10a,1d,  2h,2f,  5,0,  0, Too, 000000000000000 ; 25
+Howitzer,     nil, 0,  2.,0, 12a,2d,  3h,2f,  7,0,  0, Rob, 000000001000000 ; 26
+Fighter,      Sth, 1, 10.,1,  4a,3d,  2h,2f,  6,0,  3, Fli, 000000000010001 ; 27
+Bomber,       Sth, 1,  8.,2, 12a,1d,  2h,2f, 12,0,  0, AFl, 000000000000001 ; 28
+Helicopter,   nil, 1,  6.,0, 10a,3d,  2h,2f, 10,0,  0, CA,  100000000000001 ; 29
+Stlth Ftr.,   nil, 1, 14.,1,  8a,4d,  2h,2f,  8,0,  3, Sth, 000000000010001 ; 30
+Stlth Bmbr.,  nil, 1, 12.,2, 14a,5d,  2h,2f, 16,0,  0, Sth, 000000000000001 ; 31
+Trireme,      Nav, 2,  3.,0,  1a,1d,  1h,1f,  4,2,  4, Map, 000000000100000 ; 32
+Caravel,      Mag, 2,  3.,0,  2a,1d,  1h,1f,  4,3,  4, Nav, 000000000000000 ; 33
+Galleon,      Ind, 2,  4.,0,  0a,2d,  2h,1f,  4,4,  4, Mag, 000000000000000 ; 34
+Frigate,      E1,  2,  4.,0,  4a,2d,  2h,1f,  5,2,  2, Mag, 000000000000000 ; 35
+Ironclad,     E1,  2,  4.,0,  4a,4d,  3h,1f,  6,0,  2, SE,  000000000000000 ; 36
+Destroyer,    nil, 2,  6.,0,  4a,4d,  3h,1f,  6,0,  2, E1,  100000000000001 ; 37
+Cruiser,      Roc, 2,  5.,0,  6a,6d,  3h,2f,  8,0,  2, Stl, 100000000000001 ; 38
+AEGIS Cruiser,nil, 2,  5.,0,  8a,8d,  3h,2f, 10,0,  2, Roc, 110000000000001 ; 39
+Battleship,   nil, 2,  4.,0, 12a,12d, 4h,2f, 16,0,  2, Aut, 000000000000001 ; 40
+Submarine,    nil, 2,  3.,0, 10a,2d,  3h,2f,  6,0,  2, Cmb, 000000000001001 ; 41
+Carrier,      nil, 2,  5.,0,  1a,9d,  4h,2f, 16,0,  2, AFl, 000000010000001 ; 42
+Transport,    nil, 2,  5.,0,  0a,3d,  3h,1f,  5,8,  4, Ind, 000000000000000 ; 43
+Cruise Msl.,  nil, 1, 12.,1, 18a,0d,  1h,3f,  6,0,  0, Roc, 001000000000000 ; 44
+Nuclear Msl., nil, 1, 16.,1, 99a,0d,  1h,1f, 16,0,  0, Roc, 001000000000000 ; 45
+Diplomat,     Esp, 0,  2.,0,  0a,0d,  1h,1f,  3,0,  6, Wri, 000000000000010 ; 46
+Spy,          nil, 0,  3.,0,  0a,0d,  1h,1f,  3,0,  6, Esp, 000000000000011 ; 47
+Caravan,      Cor, 0,  1.,0,  0a,1d,  1h,1f,  5,0,  7, Tra, 000000000000010 ; 48
+Freight,      nil, 0,  2.,0,  0a,1d,  1h,1f,  5,0,  7, Cor, 000000000000010 ; 49
+Explorer,     Gue, 0,  1.,0,  0a,1d,  1h,1f,  3,0,  0, Sea, 000001000000010 ; 50
+Extra Land,   nil, 0,  1.,0,  1a,1d,  1h,1f,  5,0,  0, no,  000000000000000 ; 51
+Extra Ship,   nil, 2,  4.,0,  4a,2d,  2h,1f,  5,1,  2, no,  000000000000000 ; 52
+Extra Air,    nil, 1,  8.,4,  8a,8d,  2h,2f, 10,0,  0, no,  000000000000000 ; 53
+New Unit 54,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 54
+New Unit 55,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 55
+New Unit 56,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 56
+New Unit 57,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 57
+New Unit 58,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 58
+New Unit 59,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 59
+New Unit 60,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 60
+New Unit 61,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 61
+New Unit 62,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 62
+New Unit 63,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 63
+New Unit 64,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 64
+New Unit 65,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 65
+New Unit 66,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 66
+New Unit 67,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 67
+New Unit 68,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 68
+New Unit 69,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 69
+New Unit 70,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 70
+New Unit 71,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 71
+New Unit 72,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 72
+New Unit 73,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 73
+New Unit 74,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 74
+New Unit 75,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 75
+New Unit 76,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 76
+New Unit 77,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 77
+New Unit 78,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 78
+New Unit 79,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 79
+New Unit 80,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 80
+New Unit 81,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 81
+New Unit 82,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 82
+New Unit 83,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 83
+New Unit 84,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 84
+New Unit 85,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 85
+New Unit 86,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 86
+New Unit 87,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 87
+New Unit 88,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 88
+New Unit 89,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 89
+New Unit 90,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 90
+New Unit 91,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 91
+New Unit 92,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 92
+New Unit 93,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 93
+New Unit 94,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 94
+New Unit 95,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 95
+New Unit 96,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 96
+New Unit 97,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 97
+New Unit 98,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 98
+New Unit 99,  nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 99
+New Unit 100, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 100
+New Unit 101, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 101
+New Unit 102, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 102
+New Unit 103, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 103
+New Unit 104, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 104
+New Unit 105, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 105
+New Unit 106, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 106
+New Unit 107, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 107
+New Unit 108, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 108
+New Unit 109, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 109
+New Unit 110, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 110
+New Unit 111, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 111
+New Unit 112, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 112
+New Unit 113, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 113
+New Unit 114, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 114
+New Unit 115, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 115
+New Unit 116, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 116
+New Unit 117, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 117
+New Unit 118, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 118
+New Unit 119, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 119
+New Unit 120, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 120
+New Unit 121, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 121
+New Unit 122, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 122
+New Unit 123, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 123
+New Unit 124, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 124
+New Unit 125, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 125
+New Unit 126, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 126
+New Unit 127, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 127
+New Unit 128, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 128
+New Unit 129, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 129
+New Unit 130, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 130
+New Unit 131, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 131
+New Unit 132, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 132
+New Unit 133, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 133
+New Unit 134, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 134
+New Unit 135, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 135
+New Unit 136, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 136
+New Unit 137, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 137
+New Unit 138, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 138
+New Unit 139, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 139
+New Unit 140, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 140
+New Unit 141, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 141
+New Unit 142, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 142
+New Unit 143, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 143
+New Unit 144, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 144
+New Unit 145, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 145
+New Unit 146, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 146
+New Unit 147, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 147
+New Unit 148, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 148
+New Unit 149, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 149
+New Unit 150, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 150
+New Unit 151, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 151
+New Unit 152, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 152
+New Unit 153, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 153
+New Unit 154, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 154
+New Unit 155, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 155
+New Unit 156, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 156
+New Unit 157, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 157
+New Unit 158, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 158
+New Unit 159, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 159
+New Unit 160, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 160
+New Unit 161, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 161
+New Unit 162, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 162
+New Unit 163, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 163
+New Unit 164, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 164
+New Unit 165, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 165
+New Unit 166, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 166
+New Unit 167, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 167
+New Unit 168, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 168
+New Unit 169, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 169
+New Unit 170, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 170
+New Unit 171, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 171
+New Unit 172, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 172
+New Unit 173, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 173
+New Unit 174, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 174
+New Unit 175, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 175
+New Unit 176, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 176
+New Unit 177, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 177
+New Unit 178, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 178
+New Unit 179, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 179
+New Unit 180, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 180
+New Unit 181, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 181
+New Unit 182, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 182
+New Unit 183, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 183
+New Unit 184, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 184
+New Unit 185, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 185
+New Unit 186, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 186
+New Unit 187, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 187
+New Unit 188, nil, 0,  1.,0,  0a,1d,  2h,1f,  4,0,  5, no,  000000000000000 ; 188
+
+
+
+;
+; Note: the above 11 unit types (extra land, ship, air, and test units) are 
+; available for user defined unit types.  If these units are given prerequisites
+; other than "no" they will appear in the game when the specified
+; technology is reached.  Use if you want to create your own unit types
+; without sacrificing any of the predefined units.  Be sure to define
+; the "role" field accurately, so that the computer will understand how
+; to make use of the new units in its own civilizations.
+;
+; There is no requirement that the extra units be used to
+; create exactly one of each type; you could create three
+; ground units.  But the icons provided are for one of each.
+; The 11 extra unit types have default icons provided by the game.
+; To actually change the icons is a somewhat more difficult
+; task.  The icons are stored in "UNITS.GIF".
+;
+; Sound effects for these 11 units may be added by providing
+; CUSTOM1.WAV, CUSTOM2.WAV, and CUSTOM3.WAV for the extra units and
+: Extra1.wav through extra8.wav for the 8 test units.  These should be
+; 8-bit, mono, and sampled at 22050hz.
+;
+; Ideas:
+;
+; Hovercraft,   nil, 2,  8.,0,  0a,1d,  2h,2f,  7,1,  4, MP,  000000000000000
+;
+
+
+;
+;  Terrain
+;
+;  Movecost, defense,   food, shields, trade,
+;        . . .  Irrigate, bonus, #turns, ai-irrigate,
+;        . . .  Mine,     bonus, #turns, ai-mine
+;        . . .  Transform
+;
+;   defense = multiply by 50% to get % of normal combat factor defended at.
+;       (so 3 x 50% = 150%, meaning a strength 2 unit defends at 3).
+;
+;  Irrigate/Mine = yes, no, or type of terrain changed to
+;  Transform     = Terrain type engineers can transform to
+;
+;  bonus = # extra production from that change
+;
+;  turns = # turns for settler to make change
+;
+;  ai    = Minimum govt level necessary for
+;          computer player to want to perform irrigate/mine
+;        0 Never
+;        1 Despotism
+;        2 Monarchy
+;        3 Communism
+;        4 Fundamentalism
+;        5 Republic
+;        6 Democracy
+;
+@TERRAIN
+Desert,     1,2,  0,1,0,   yes, 1, 5, 5,   yes, 1, 5,  3,  Pln,  no, ; Drt
+Plains,     1,2,  1,1,0,   yes, 1, 5, 1,   For, 0,15,  0,  Grs,  no, ; Pln
+Grassland,  1,2,  2,1,0,   yes, 1, 5, 2,   For, 0,10,  0,  Hil,  no, ; Grs
+Forest,     2,3,  1,2,0,   Pln, 0, 5, 5,   no,  0, 0,  0,  Grs,  no, ; For
+Hills,      2,4,  1,0,0,   yes, 1,10, 0,   yes, 3,10,  1,  Pln,  no, ; Hil
+Mountains,  3,6,  0,1,0,   no,  0, 0, 0,   yes, 1,10,  6,  Hil,  no, ; Mou
+Tundra,     1,2,  1,0,0,   yes, 1,10, 1,   no,  0, 0,  0,  Drt,  no, ; Tun
+Glacier,    2,2,  0,0,0,   no,  0, 0, 0,   yes, 1,15,  3,  Tun,  no, ; Gla
+Swamp,      2,3,  1,0,0,   Grs, 0,15, 6,   For, 0,15,  0,  Pln,  no, ; Swa
+Jungle,     2,3,  1,0,0,   Grs, 0,15, 6,   For, 0,15,  0,  Pln,  no, ; Jun
+Ocean,      1,2,  1,0,2,   no,  0, 0, 0,   no,  0, 0,  0,  no,   no, ; Oce
+Oasis,      1,2,  3,1,0,
+Buffalo,    1,2,  1,3,0,
+Grassland,  1,2,  2,1,0,
+Pheasant,   2,3,  3,2,0,
+Coal,       2,4,  1,2,0,
+Gold,       3,6,  0,1,6,
+Game,       1,2,  3,1,0,
+Ivory,      2,2,  1,1,4,
+Peat,       2,3,  1,4,0,
+Gems,       2,3,  1,0,4,
+Fish,       1,2,  3,0,2,
+Desert Oil, 1,2,  0,4,0,
+Wheat,      1,2,  3,1,0,
+Grassland,  1,2,  2,1,0,
+Silk,       2,3,  1,2,3,
+Wine,       2,4,  1,0,4,
+Iron,       3,6,  0,4,0,
+Furs,       1,2,  2,0,3,
+Glacier Oil,2,2,  0,4,0,
+Spice,      2,3,  3,0,4,
+Fruit,      2,3,  4,0,1,
+Whales,     1,2,  2,2,3,
+
+@TERRAIN1
+Desert,     1,2,  0,1,0,   yes, 1, 5, 5,   yes, 1, 5,  3,  Pln,  no, ; Drt
+Plains,     1,2,  1,1,0,   yes, 1, 5, 1,   For, 0,15,  0,  Grs,  no, ; Pln
+Grassland,  1,2,  2,1,0,   yes, 1, 5, 2,   For, 0,10,  0,  Hil,  no, ; Grs
+Forest,     2,3,  1,2,0,   Pln, 0, 5, 5,   no,  0, 5,  0,  Grs,  no, ; For
+Hills,      2,4,  1,0,0,   yes, 1,10, 0,   yes, 3,10,  1,  Pln,  no, ; Hil
+Mountains,  3,6,  0,1,0,   no,  1,10, 0,   yes, 1,10,  6,  Hil,  no, ; Mou
+Tundra,     1,2,  1,0,0,   yes, 1,10, 1,   no,  0, 0,  0,  Drt,  no, ; Tun
+Glacier,    2,2,  0,0,0,   no,  0, 0, 0,   yes, 1,15,  3,  Tun,  no, ; Gla
+Swamp,      2,3,  1,0,0,   Grs, 0,15, 6,   For, 0,15,  0,  Pln,  no, ; Swa
+Jungle,     2,3,  1,0,0,   Grs, 0,15, 6,   For, 0,15,  0,  Pln,  no, ; Jun
+Ocean,      1,2,  1,0,2,   no,  0, 0, 0,   no,  0, 0,  0,  no,   no, ; Oce
+Oasis,      1,2,  3,1,0,
+Buffalo,    1,2,  1,3,0,
+Grassland,  1,2,  2,1,0,
+Pheasant,   2,3,  3,2,0,
+Coal,       2,4,  1,2,0,
+Gold,       3,6,  0,1,6,
+Game,       1,2,  3,1,0,
+Ivory,      2,2,  1,1,4,
+Peat,       2,3,  1,4,0,
+Gems,       2,3,  1,0,4,
+Fish,       1,2,  3,0,2,
+Desert Oil, 1,2,  0,4,0,
+Wheat,      1,2,  3,1,0,
+Grassland,  1,2,  2,1,0,
+Silk,       2,3,  1,2,3,
+Wine,       2,4,  1,0,4,
+Iron,       3,6,  0,4,0,
+Furs,       1,2,  2,0,3,
+Glacier Oil,2,2,  0,4,0,
+Spice,      2,3,  3,0,4,
+Fruit,      2,3,  4,0,1,
+Whales,     1,2,  2,2,3,
+
+@TERRAIN2
+Desert,     1,2,  0,1,0,   yes, 1, 5, 5,   yes, 1, 5,  3,  Pln,  no, ; Drt
+Plains,     1,2,  1,1,0,   yes, 1, 5, 1,   For, 0,15,  0,  Grs,  no, ; Pln
+Grassland,  1,2,  2,1,0,   yes, 1, 5, 2,   For, 0,10,  0,  Hil,  no, ; Grs
+Forest,     2,3,  1,2,0,   Pln, 0, 5, 5,   no,  0, 5,  0,  Grs,  no, ; For
+Hills,      2,4,  1,0,0,   yes, 1,10, 0,   yes, 3,10,  1,  Pln,  no, ; Hil
+Mountains,  3,6,  0,1,0,   no,  1,10, 0,   yes, 1,10,  6,  Hil,  no, ; Mou
+Tundra,     1,2,  1,0,0,   yes, 1,10, 1,   no,  0, 0,  0,  Drt,  no, ; Tun
+Glacier,    2,2,  0,0,0,   no,  0, 0, 0,   yes, 1,15,  3,  Tun,  no, ; Gla
+Swamp,      2,3,  1,0,0,   Grs, 0,15, 6,   For, 0,15,  0,  Pln,  no, ; Swa
+Jungle,     2,3,  1,0,0,   Grs, 0,15, 6,   For, 0,15,  0,  Pln,  no, ; Jun
+Ocean,      1,2,  1,0,2,   no,  0, 0, 0,   no,  0, 0,  0,  no,   no, ; Oce
+Oasis,      1,2,  3,1,0,
+Buffalo,    1,2,  1,3,0,
+Grassland,  1,2,  2,1,0,
+Pheasant,   2,3,  3,2,0,
+Coal,       2,4,  1,2,0,
+Gold,       3,6,  0,1,6,
+Game,       1,2,  3,1,0,
+Ivory,      2,2,  1,1,4,
+Peat,       2,3,  1,4,0,
+Gems,       2,3,  1,0,4,
+Fish,       1,2,  3,0,2,
+Desert Oil, 1,2,  0,4,0,
+Wheat,      1,2,  3,1,0,
+Grassland,  1,2,  2,1,0,
+Silk,       2,3,  1,2,3,
+Wine,       2,4,  1,0,4,
+Iron,       3,6,  0,4,0,
+Furs,       1,2,  2,0,3,
+Glacier Oil,2,2,  0,4,0,
+Spice,      2,3,  3,0,4,
+Fruit,      2,3,  4,0,1,
+Whales,     1,2,  2,2,3,
+
+@TERRAIN3
+Desert,     1,2,  0,1,0,   yes, 1, 5, 5,   yes, 1, 5,  3,  Pln,  no, ; Drt
+Plains,     1,2,  1,1,0,   yes, 1, 5, 1,   For, 0,15,  0,  Grs,  no, ; Pln
+Grassland,  1,2,  2,1,0,   yes, 1, 5, 2,   For, 0,10,  0,  Hil,  no, ; Grs
+Forest,     2,3,  1,2,0,   Pln, 0, 5, 5,   no,  0, 5,  0,  Grs,  no, ; For
+Hills,      2,4,  1,0,0,   yes, 1,10, 0,   yes, 3,10,  1,  Pln,  no, ; Hil
+Mountains,  3,6,  0,1,0,   no,  1,10, 0,   yes, 1,10,  6,  Hil,  no, ; Mou
+Tundra,     1,2,  1,0,0,   yes, 1,10, 1,   no,  0, 0,  0,  Drt,  no, ; Tun
+Glacier,    2,2,  0,0,0,   no,  0, 0, 0,   yes, 1,15,  3,  Tun,  no, ; Gla
+Swamp,      2,3,  1,0,0,   Grs, 0,15, 6,   For, 0,15,  0,  Pln,  no, ; Swa
+Jungle,     2,3,  1,0,0,   Grs, 0,15, 6,   For, 0,15,  0,  Pln,  no, ; Jun
+Ocean,      1,2,  1,0,2,   no,  0, 0, 0,   no,  0, 0,  0,  no,   no, ; Oce
+Oasis,      1,2,  3,1,0,
+Buffalo,    1,2,  1,3,0,
+Grassland,  1,2,  2,1,0,
+Pheasant,   2,3,  3,2,0,
+Coal,       2,4,  1,2,0,
+Gold,       3,6,  0,1,6,
+Game,       1,2,  3,1,0,
+Ivory,      2,2,  1,1,4,
+Peat,       2,3,  1,4,0,
+Gems,       2,3,  1,0,4,
+Fish,       1,2,  3,0,2,
+Desert Oil, 1,2,  0,4,0,
+Wheat,      1,2,  3,1,0,
+Grassland,  1,2,  2,1,0,
+Silk,       2,3,  1,2,3,
+Wine,       2,4,  1,0,4,
+Iron,       3,6,  0,4,0,
+Furs,       1,2,  2,0,3,
+Glacier Oil,2,2,  0,4,0,
+Spice,      2,3,  3,0,4,
+Fruit,      2,3,  4,0,1,
+Whales,     1,2,  2,2,3,
+
+
+@GOVERNMENTS
+Anarchy,        Mr.,         Ms.
+Despotism,      Emperor,     Empress
+Monarchy,       King,        Queen
+Communism,      Comrade,     Comrade
+Fundamentalism, High Priest, High Priestess
+Republic,       Consul,      Consul
+Democracy,      President,   President
+
+;
+;   Leaders
+;
+;   leader, female, color, style, plural, adjective, ...
+;           ...attack, expand, civilize, ...
+;           ...govt, male, female...<repeat>
+;
+;   female:     0 = male           1 = female
+;
+;   color:  Color set (1 - 7)
+;   style:  City style (0 - 3)
+;           0 = Bronze Age
+;           1 = Classical
+;           2 = Far East
+;           3 = Medieval
+;
+;   attack:     1 = aggressive    -1 = rational
+;   expand:     1 = expansionist  -1 = perfectionist
+;   civilize:   1 = civilized     -1 = militaristic
+;
+;   govt = government type for name replacement (0 = Anarchy, 6 = Democracy)
+;
+;   male, female = titles for leader of government
+;
+@LEADERS
+Caesar,       Livia,               0, 1, 1, Romans,      Roman,       0,  1,  1,     1, Dictator, Dictator, 2, Imperator, Imperatrix
+Hammurabi,    Ishtari,             0, 2, 0, Babylonians, Babylonian, -1, -1,  1,
+Frederick,    Maria Theresa,       0, 3, 3, Germans,     German,      1, -1,  1,     4, Archbishop, Archbishop, 6, Chancellor, Chancellor
+Ramesses,     Cleopatra,           1, 4, 0, Egyptians,   Egyptian,    0,  0,  1,     1, Pharaoh, Pharaoh, 2, Great Pharaoh, Great Pharaoh
+Abe Lincoln,  E. Roosevelt,        0, 5, 1, Americans,   American,   -1,  0,  1,     4, Reverend, Reverend, 5, Speaker, Speaker
+Alexander,    Hippolyta,           1, 6, 1, Greeks,      Greek,       0,  1, -1,     6, Prime Minister, Prime Minister
+Mohandas Gandhi,Indira Gandhi,     0, 7, 2, Indians,     Indian,     -1, -1,  0,     2, Maharaja, Maharaja,
+Lenin,        Catherine the Great, 1, 1, 3, Russians,    Russian,     1,  0, -1,     2, Czar, Czarina, 4, Patriarch, Matriarch
+Shaka,        Shakala,             0, 2, 0, Zulus,       Zulu,        1,  0,  0,
+Louis XIV,    Joan of Arc,         0, 3, 3, French,      French,      1,  1,  1,     4, Archbishop, Archbishop, 6, Premier, Premier
+Montezuma,    Nazca,               0, 4, 0, Aztecs,      Aztec,       0, -1,  1,
+Mao Tse Tung, Wu Zhao,             0, 5, 2, Chinese,     Chinese,     0,  0,  1,     3, Chairman, Chairperson
+Henry VIII,   Elizabeth I,         1, 6, 3, English,     English,     0,  1,  0,     4, Lord Protector, Lady Protector, 6, Prime Minister, Prime Minister
+Genghis Khan, Bortei,              0, 7, 0, Mongols,     Mongol,      1,  1, -1,
+Cunobelin,    Boadicea,            1, 1, 0, Celts,       Celtic,     -1,  1,  0,     4, Druid, Druid
+Tokugawa,     Amaterasu,           0, 2, 2, Japanese,    Japanese,    1, -1, -1,     2, Shogun, Shogun, 6, Prime Minister, Prime Minister
+Canute,       Gunnhild,            1, 3, 3, Vikings,     Viking,      1,  1,  0,     1, Warlord, Warlord
+Philip II,    Isabella,            1, 4, 3, Spanish,     Spanish,    -1,  1, -1,     4, Archbishop, Archbishop
+Xerxes,       Scheherezade,        0, 5, 0, Persians,    Persian,     0, -1,  0,     2, Shah, Shah,  4, Ayatollah, Ayatollah
+Hannibal,     Dido,                0, 6, 1, Carthaginians, Carthaginian, 0,  0, -1,
+Sitting Bull, Sacajawea,           0, 7, 0, Sioux,       Sioux,       0,  0,  0,     1, Chief, Chief, 2, Great Chief, Great Chief
+
+Saladin,    ...,     0, 5, Arabs,       Arab,        1,  0,  1,     4, Ayatollah, Ayatollah, 2, Sultan, Sultana
+Atawallpa,  ...,     0, 1, Incas,       Inca,       -1,  1,  1,
+
+
+
+;
+;   Trading Commodities
+;
+@CARAVAN
+Hides,
+Wool,
+Beads,
+Cloth,
+Salt,
+Coal,
+Copper,
+Dye,
+Wine,
+Silk,
+Silver,
+Spice,
+Gems,
+Gold,
+Oil,
+Uranium,
+
+
+@ORDERS
+Fortify,            F
+Fortified,          F
+Sleep,              S
+Build Fortress,     F
+Build Road,         R
+Build Irrigation,   I
+Build Mine,         m
+Transform,          O
+Clean Pollution,    p
+Build Airbase,      E
+Build Transporter,  +
+Go to,              G
+
+
+@DIFFICULTY
+Chieftain
+Warlord
+Prince
+King
+Emperor
+Deity
+
+@ATTITUDES
+Worshipful
+Friendly
+Cordial
+Receptive
+Neutral
+Reserved
+Icy
+Hostile
+Enraged
+
+
+@CIVILIZE2
+0		; AFl
+0		; Alp
+0		; Amp
+0		; Ast
+0		; Ato
+0		; Aut
+0		; Ban
+0		; Bri
+0		; Bro
+0		; Cer
+0		; Che
+0		; Chi
+0		; CoL
+0		; CA
+0		; Cmb
+0		; Cmn
+0		; Cmp
+0		; Csc
+0		; Cst
+0		; Cor
+0		; Cur
+0		; Dem
+0		; Eco
+0		; E1
+0		; E2
+0		; Eng
+0		; Env
+0		; Esp
+0		; Exp
+0		; Feu
+0		; Fli
+0		; Fun
+0		; FP
+0		; Gen
+0		; Gue
+0		; Gun
+0		; Hor
+0		; Ind
+0		; Inv
+0		; Iro
+0		; Lab
+0		; Las
+0		; Ldr
+0		; Lit
+0		; Too
+0		; Mag
+0		; Map
+0		; Mas
+0		; MP
+0		; Mat
+0		; Med
+0		; Met
+0		; Min
+0		; Mob
+0		; Mon
+0		; MT
+0		; Mys
+0		; Nav
+0		; NF
+0		; NP
+0		; Phi
+0		; Phy
+0		; Pla
+0		; Plu  (Cst & Pot)
+0		; PT
+0		; Pot
+0		; Rad
+0		; RR
+0		; Rec
+0		; Ref
+0		; Rfg
+0		; Rep
+0		; Rob
+0		; Roc
+0		; San
+0		; Sea
+0		; SFl
+0		; Sth
+0		; SE
+0		; Stl
+0		; Sup
+0		; Tac
+0		; The
+0		; ToG
+4		; Tra
+0		; Uni
+0		; War
+0		; Whe
+0		; Wri
+0		; ...
+0		; U1
+0		; U2
+0		; U3
+0		; X1
+0		; X2
+0		; X3
+0		; X4
+0		; X5
+0		; X6
+0		; X7
+
+
+
+@LEADERS2
+00000000		;Romans,      Roman,       0,  1,  1,     1, Dictator, Dictator, 2, Imperator, Imperatrix
+00000000		;Babylonians, Babylonian, -1, -1,  1,
+00000000		;Germans,     German,      1, -1,  1,     4, Archbishop, Archbishop, 6, Chancellor, Chancellor
+00000000		;Egyptians,   Egyptian,    0,  0,  1,     1, Pharaoh, Pharaoh, 2, Great Pharaoh, Great Pharaoh
+00000000		;Americans,   American,   -1,  0,  1,     4, Reverend, Reverend, 5, Speaker, Speaker
+00000000		;Greeks,      Greek,       0,  1, -1,     6, Prime Minister, Prime Minister
+00000000		;Indians,     Indian,     -1, -1,  0,     2, Maharaja, Maharaja,
+00000000		;Russians,    Russian,     1,  0, -1,     2, Czar, Czarina, 4, Patriarch, Matriarch
+00000000		;Zulus,       Zulu,        1,  0,  0,
+00000000		;French,      French,      1,  1,  1,     4, Archbishop, Archbishop, 6, Premier, Premier
+00000000		;Aztecs,      Aztec,       0, -1,  1,
+00000000		;Chinese,     Chinese,     0,  0,  1,     3, Chairman, Chairperson
+00000000		;English,     English,     0,  1,  0,     4, Lord Protector, Lady Protector, 6, Prime Minister, Prime Minister
+00000000		;Mongols,     Mongol,      1,  1, -1,
+00000000		;Celts,       Celtic,     -1,  1,  0,     4, Druid, Druid
+00000000		;Japanese,    Japanese,    1, -1, -1,     2, Shogun, Shogun, 6, Prime Minister, Prime Minister
+00000000		;Vikings,     Viking,      1,  1,  0,     1, Warlord, Warlord
+00000000		;Spanish,     Spanish,    -1,  1, -1,     4, Archbishop, Archbishop
+00000000		;Persians,    Persian,     0, -1,  0,     2, Shah, Shah,  4, Ayatollah, Ayatollah
+00000000		;Carthaginians, Carthaginian, 0,  0, -1,
+00000000		;Sioux,       Sioux,       0,  0,  0,     1, Chief, Chief, 2, Great Chief, Great Chief
+
+00000000		; Saladin,    ...,     0, 5, Arabs,       Arab,        1,  0,  1,     4, Ayatollah, Ayatollah, 2, Sultan, Sultana
+00000000		; Atawallpa,  ...,     0, 1, Incas,       Inca,       -1,  1,  1,
+
+
+; Advanced unit fields
+
+; A) 'tribe may build' mask:		0 - can't; 1 - can
+; B) 'not allowed on map' mask:		1 - not allowed on map
+; C) minimum bribe amount:			n - minimum bribe; 0 - don't care; -1 - can't bribe
+; D) 'build transport site' mask:	1: can; 0: can't for each site type
+; E) 'use transport site' mask:		1: can; 0: can't for each site type
+; F) native transport ability:		1: can; 0: can't for each map relationship type
+; G) General flags
+;	00000001	invisible until attack:					1 - invisible
+;	00000010	non-disbandable (human players only):	1 - cannot disband
+;   00000100	0-range-air-unit damage override:		1 - override damage
+;   00001000	barbarian units can't be bought off:	1 - can't buy off
+;	00010000	impassable terrain override:			1 - override impassable terrain
+;   01000000    barbarian unit will not expire:         1 - no expire
+;	10000000    override .SPR file for this unit:	    1 - don't use .SPR
+
+;   A         B     C          D                 E               F             G
+
+@UNITS_ADVANCED
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Settlers
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Engineers
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Warriors
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Phalanx
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Archers
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Legion
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Pikemen
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Musketeers
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Fanatics
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Partisans
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Alpine Troops
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Riflemen
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Marines
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Paratroopers
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Mech. Inf.
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Horsemen
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Chariot
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Elephant
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Crusaders
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Knights
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Dragoons
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Cavalry
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Armor
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Catapult
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Cannon
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Artillery
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Howitzer
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Fighter
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Bomber
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Helicopter
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Stlth Ftr.
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Stlth Bmbr.
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Trireme
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Caravel
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Galleon
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Frigate
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Ironclad
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Destroyer
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Cruiser
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;AEGIS Cruiser
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Battleship
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Submarine
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Carrier
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Transport
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Cruise Msl.
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Nuclear Msl.
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Diplomat
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Spy
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Caravan
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Freight
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Explorer
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Extra Land
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Extra Ship
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;Extra Air
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 54
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 55
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 56
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 57
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 58
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 59
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 60
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 61
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 62
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 63
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 64
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 65
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 66
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 67
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 68
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 69
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 70
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 71
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 72
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 73
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 74
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 75
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 76
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 77
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 78
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 79
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 80
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 81
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 82
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 83
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 84
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 85
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 86
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 87
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 88
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 89
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 90
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 91
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 92
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 93
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 94
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 95
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 96
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 97
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 98
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 99
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 100
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 101
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 102
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 103
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 104
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 105
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 106
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 107
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 108
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 109
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 110
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 111
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 112
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 113
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 114
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 115
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 116
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 117
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 118
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 119
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 120
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 121
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 122
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 123
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 124
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 125
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 126
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 127
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 128
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 129
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 130
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 131
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 132
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 133
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 134
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 135
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 136
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 137
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 138
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 139
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 140
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 141
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 142
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 143
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 144
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 145
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 146
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 147
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 148
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 149
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 150
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 151
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 152
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 153
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 154
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 155
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 156
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 157
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 158
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 159
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 160
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 161
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 162
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 163
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 164
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 165
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 166
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 167
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 168
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 169
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 170
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 171
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 172
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 173
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 174
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 175
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 176
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 177
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 178
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 179
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 180
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 181
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 182
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 183
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 184
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 185
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 186
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 187
+11111111, 00000000, 0, 0000000000000000,0000000000000000,0000000000000000, 00000000  ;New Unit 188
+
+
+@MAP_TRANSPORT_RELATIONSHIPS
+1,2
+3,4
+1,3
+
+; map, primary unit type, secondary unit type
+
+@INITIAL_SETTINGS
+0,0,3	;Romans
+0,0,3	;Babylonians
+0,0,3	;Germans  
+0,0,3	;Egyptians 
+0,0,3	;Americans  
+0,0,3	;Greeks     
+0,0,3	;Indians  
+0,0,3	;Russians    
+0,0,3	;Zulus       
+0,0,3	;French     
+0,0,3	;Aztecs     
+0,0,3	;Chinese   
+0,0,3	;English    
+0,0,3	;Mongols    
+0,0,3	;Celts      
+0,0,3	;Japanese    
+0,0,3	;Vikings    
+0,0,3	;Spanish     
+0,0,3	;Persians   
+0,0,3	;Carthaginians
+0,0,3	;Sioux      
+
+@SOUNDS
+<none>  	; Settlers
+<none>  	; Engineers
+Warrior.wav  	; Warriors
+<none>  	; Phalanx
+Archers.wav  	; Archers
+<none>  	; Legion
+Warrior.wav  	; Pikemen
+<none>  	; Musketeers
+Fanatics.wav  	; Fanatics
+Partisans.wav  	; Partisans
+Marines.wav  	; Alpine Troops
+Riflemen.wav  	; Riflemen
+Marines.wav  	; Marines
+<none>  	; Paratroopers
+<none>  	; Mech. Inf.
+<none>  	; Horsemen
+Chariot.wav  	; Chariot
+Elephant.wav  	; Elephant
+<none>  	; Crusaders
+<none>  	; Knights
+<none>  	; Dragoons
+<none>  	; Cavalry
+Oldcannons.wav  ; Armor
+<none>  	; Catapult
+Oldcannons.wav  ; Cannon
+<none>  	; Artillery
+<none>  	; Howitzer
+<none>  	; Fighter
+<none>  	; Bomber
+<none>  	; Helicopter
+<none>  	; Stlth Ftr.
+<none>  	; Stlth Bmbr.
+Trireme.wav  	; Trireme
+<none>  	; Caravel
+<none>  	; Galleon
+<none>  	; Frigate
+<none>  	; Ironclad
+<none>  	; Destroyer
+<none>  	; Cruiser
+<none>  	; AEGIS Cruiser
+<none>  	; Battleship
+<none>  	; Submarine
+<none>  	; Carrier
+Transport.wav  	; Transport
+<none>  	; Cruise Msl.
+<none>  	; Nuclear Msl.
+<none>  	; Diplomat
+Spysilencer.wav ; Spy
+<none>  	; Caravan
+<none>  	; Freight
+<none>  	; Explorer
+<none>  	; Extra Land
+<none>  	; Extra Ship
+<none>  	; Extra Air
+<none> 		; New Unit 54
+<none> 		; New Unit 55
+<none> 		; New Unit 56
+<none> 		; New Unit 57
+<none> 		; New Unit 58
+<none> 		; New Unit 59
+<none> 		; New Unit 60
+<none> 		; New Unit 61
+<none> 		; New Unit 62
+<none> 		; New Unit 63
+<none> 		; New Unit 64
+<none> 		; New Unit 65
+<none> 		; New Unit 66
+<none> 		; New Unit 67
+<none> 		; New Unit 68
+<none> 		; New Unit 69
+<none> 		; New Unit 70
+<none> 		; New Unit 71
+<none> 		; New Unit 72
+<none> 		; New Unit 73
+<none> 		; New Unit 74
+<none> 		; New Unit 75
+<none> 		; New Unit 76
+<none> 		; New Unit 77
+<none> 		; New Unit 78
+<none> 		; New Unit 79
+<none> 		; New Unit 80
+<none> 		; New Unit 81
+<none> 		; New Unit 82
+<none> 		; New Unit 83
+<none> 		; New Unit 84
+<none> 		; New Unit 85
+<none> 		; New Unit 86
+<none> 		; New Unit 87
+<none> 		; New Unit 88
+<none> 		; New Unit 89
+<none> 		; New Unit 90
+<none> 		; New Unit 91
+<none> 		; New Unit 92
+<none> 		; New Unit 93
+<none> 		; New Unit 94
+<none> 		; New Unit 95
+<none> 		; New Unit 96
+<none> 		; New Unit 97
+<none> 		; New Unit 98
+<none> 		; New Unit 99
+<none> 		; New Unit 100
+<none> 		; New Unit 101
+<none> 		; New Unit 102
+<none> 		; New Unit 103
+<none> 		; New Unit 104
+<none> 		; New Unit 105
+<none> 		; New Unit 106
+<none> 		; New Unit 107
+<none> 		; New Unit 108
+<none> 		; New Unit 109
+<none> 		; New Unit 110
+<none> 		; New Unit 111
+<none> 		; New Unit 112
+<none> 		; New Unit 113
+<none> 		; New Unit 114
+<none> 		; New Unit 115
+<none> 		; New Unit 116
+<none> 		; New Unit 117
+<none> 		; New Unit 118
+<none> 		; New Unit 119
+<none> 		; New Unit 120
+<none> 		; New Unit 121
+<none> 		; New Unit 122
+<none> 		; New Unit 123
+<none> 		; New Unit 124
+<none> 		; New Unit 125
+<none> 		; New Unit 126
+<none> 		; New Unit 127
+<none> 		; New Unit 128
+<none> 		; New Unit 129
+<none> 		; New Unit 130
+<none> 		; New Unit 131
+<none> 		; New Unit 132
+<none> 		; New Unit 133
+<none> 		; New Unit 134
+<none> 		; New Unit 135
+<none> 		; New Unit 136
+<none> 		; New Unit 137
+<none> 		; New Unit 138
+<none> 		; New Unit 139
+<none> 		; New Unit 140
+<none> 		; New Unit 141
+<none> 		; New Unit 142
+<none> 		; New Unit 143
+<none> 		; New Unit 144
+<none> 		; New Unit 145
+<none> 		; New Unit 146
+<none> 		; New Unit 147
+<none> 		; New Unit 148
+<none> 		; New Unit 149
+<none> 		; New Unit 150
+<none> 		; New Unit 151
+<none> 		; New Unit 152
+<none> 		; New Unit 153
+<none> 		; New Unit 154
+<none> 		; New Unit 155
+<none> 		; New Unit 156
+<none> 		; New Unit 157
+<none> 		; New Unit 158
+<none> 		; New Unit 159
+<none> 		; New Unit 160
+<none> 		; New Unit 161
+<none> 		; New Unit 162
+<none> 		; New Unit 163
+<none> 		; New Unit 164
+<none> 		; New Unit 165
+<none> 		; New Unit 166
+<none> 		; New Unit 167
+<none> 		; New Unit 168
+<none> 		; New Unit 169
+<none> 		; New Unit 170
+<none> 		; New Unit 171
+<none> 		; New Unit 172
+<none> 		; New Unit 173
+<none> 		; New Unit 174
+<none> 		; New Unit 175
+<none> 		; New Unit 176
+<none> 		; New Unit 177
+<none> 		; New Unit 178
+<none> 		; New Unit 179
+<none> 		; New Unit 180
+<none> 		; New Unit 181
+<none> 		; New Unit 182
+<none> 		; New Unit 183
+<none> 		; New Unit 184
+<none> 		; New Unit 185
+<none> 		; New Unit 186
+<none> 		; New Unit 187
+<none> 		; New Unit 188
+
+
+@RIVERS
+River,          ; map 1
+River,          ; map 2
+River,          ; map 3
+River,          ; map 4
+
+; please do not remove this line
+

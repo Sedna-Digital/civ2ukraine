@@ -1,0 +1,190 @@
+@SOUNDS
+none  	; Settlers
+none  	; Engineers
+Warrior.wav  	; Warriors
+none  	; Phalanx
+Archers.wav  	; Archers
+none  	; Legion
+Warrior.wav  	; Pikemen
+none  	; Musketeers
+Fanatics.wav  	; Fanatics
+Partisans.wav  	; Partisans
+Marines.wav  	; Alpine Troops
+Riflemen.wav  	; Riflemen
+Marines.wav  	; Marines
+none  	; Paratroopers
+none  	; Mech. Inf.
+none  	; Horsemen
+Chariot.wav  	; Chariot
+Elephant.wav  	; Elephant
+none  	; Crusaders
+none  	; Knights
+none  	; Dragoons
+none  	; Cavalry
+Oldcannons.wav  ; Armor
+none  	; Catapult
+Oldcannons.wav  ; Cannon
+none  	; Artillery
+none  	; Howitzer
+none  	; Fighter
+none  	; Bomber
+none  	; Helicopter
+none  	; Stlth Ftr.
+none  	; Stlth Bmbr.
+Trireme.wav  	; Trireme
+none  	; Caravel
+none  	; Galleon
+none  	; Frigate
+none  	; Ironclad
+none  	; Destroyer
+none  	; Cruiser
+none  	; AEGIS Cruiser
+none  	; Battleship
+none  	; Submarine
+none  	; Carrier
+Transport.wav  	; Transport
+none  	; Cruise Msl.
+none  	; Nuclear Msl.
+none  	; Diplomat
+Spysilencer.wav ; Spy
+none  	; Caravan
+none  	; Freight
+none  	; Explorer
+none  	; Extra Land
+none  	; Extra Ship
+none  	; Extra Air
+none 		; New Unit 54
+none 		; New Unit 55
+none 		; New Unit 56
+none 		; New Unit 57
+none 		; New Unit 58
+none 		; New Unit 59
+none 		; New Unit 60
+none 		; New Unit 61
+none 		; New Unit 62
+none 		; New Unit 63
+none 		; New Unit 64
+none 		; New Unit 65
+none 		; New Unit 66
+none 		; New Unit 67
+none 		; New Unit 68
+none 		; New Unit 69
+none 		; New Unit 70
+none 		; New Unit 71
+none 		; New Unit 72
+none 		; New Unit 73
+none 		; New Unit 74
+none 		; New Unit 75
+none 		; New Unit 76
+none 		; New Unit 77
+none 		; New Unit 78
+none 		; New Unit 79
+none 		; New Unit 80
+none 		; New Unit 81
+none 		; New Unit 82
+none 		; New Unit 83
+none 		; New Unit 84
+none 		; New Unit 85
+none 		; New Unit 86
+none 		; New Unit 87
+none 		; New Unit 88
+none 		; New Unit 89
+none 		; New Unit 90
+none 		; New Unit 91
+none 		; New Unit 92
+none 		; New Unit 93
+none 		; New Unit 94
+none 		; New Unit 95
+none 		; New Unit 96
+none 		; New Unit 97
+none 		; New Unit 98
+none 		; New Unit 99
+none 		; New Unit 100
+none 		; New Unit 101
+none 		; New Unit 102
+none 		; New Unit 103
+none 		; New Unit 104
+none 		; New Unit 105
+none 		; New Unit 106
+none 		; New Unit 107
+none 		; New Unit 108
+none 		; New Unit 109
+none 		; New Unit 110
+none 		; New Unit 111
+none 		; New Unit 112
+none 		; New Unit 113
+none 		; New Unit 114
+none 		; New Unit 115
+none 		; New Unit 116
+none 		; New Unit 117
+none 		; New Unit 118
+none 		; New Unit 119
+none 		; New Unit 120
+none 		; New Unit 121
+none 		; New Unit 122
+none 		; New Unit 123
+none 		; New Unit 124
+none 		; New Unit 125
+none 		; New Unit 126
+none 		; New Unit 127
+none 		; New Unit 128
+none 		; New Unit 129
+none 		; New Unit 130
+none 		; New Unit 131
+none 		; New Unit 132
+none 		; New Unit 133
+none 		; New Unit 134
+none 		; New Unit 135
+none 		; New Unit 136
+none 		; New Unit 137
+none 		; New Unit 138
+none 		; New Unit 139
+none 		; New Unit 140
+none 		; New Unit 141
+none 		; New Unit 142
+none 		; New Unit 143
+none 		; New Unit 144
+none 		; New Unit 145
+none 		; New Unit 146
+none 		; New Unit 147
+none 		; New Unit 148
+none 		; New Unit 149
+none 		; New Unit 150
+none 		; New Unit 151
+none 		; New Unit 152
+none 		; New Unit 153
+none 		; New Unit 154
+none 		; New Unit 155
+none 		; New Unit 156
+none 		; New Unit 157
+none 		; New Unit 158
+none 		; New Unit 159
+none 		; New Unit 160
+none 		; New Unit 161
+none 		; New Unit 162
+none 		; New Unit 163
+none 		; New Unit 164
+none 		; New Unit 165
+none 		; New Unit 166
+none 		; New Unit 167
+none 		; New Unit 168
+none 		; New Unit 169
+none 		; New Unit 170
+none 		; New Unit 171
+none 		; New Unit 172
+none 		; New Unit 173
+none 		; New Unit 174
+none 		; New Unit 175
+none 		; New Unit 176
+none 		; New Unit 177
+none 		; New Unit 178
+none 		; New Unit 179
+none 		; New Unit 180
+none 		; New Unit 181
+none 		; New Unit 182
+none 		; New Unit 183
+none 		; New Unit 184
+none 		; New Unit 185
+none 		; New Unit 186
+none 		; New Unit 187
+none 		; New Unit 188

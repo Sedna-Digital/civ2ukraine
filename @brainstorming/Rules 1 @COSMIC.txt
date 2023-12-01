@@ -1,0 +1,42 @@
+@COSMIC
+6       ; Road movement multiplier
+3       ; 1 in x chance Trireme lost (mod. by Seafaring, Navigation)
+2       ; # of food each citizen eats per turn
+10      ; # of rows in food box (rows * city_size+1 = box)
+10      ; # of rows in shield box
+1       ; Settlers eat (govt <= Monarchy)
+2       ; Settlers eat (govt >= Communism)
+7       ; City size for first unhappiness at Chieftain level
+14      ; Riot factor based on # cities (higher factor lessens the effect)
+4       ; Aqueduct needed to exceed this size
+8       ; Sewer System needed to exceed this size
+10      ; Tech paradigm (higher # slows research)
+20      ; Base time for engineers to transform terrain (x2)
+4       ; Monarchy  pays support for all units past this (max 8)
+6       ; Communism pays support for all units past this (max 8)
+8       ; Fundamentalism pays support for all units past this (max 8)
+0       ; Communism is equivalent of this palace distance.
+30      ; Fundamentalism loses this % of science
+50      ; Percent shield penalty for production type change
+10      ; Max paradrop range
+75      ; Mass/Thrust paradigm (increasing slows spaceship time)
+7       ; Max effective science rate in fundamentalism (x10, so 5 = 50%)
+1	; Value of each citizen to the Civilization Score.
+20	; Value of each wonder to the Civilization Score.
+1	; Reward for landing on A. Centauri first = this multiplier*(# of habitats)*(prob. of success) 
+-10	; Cost to Civilization Score (+ or -) for each extant non-AI controlled polluted tile. 
+1	; For each turn of peace after turn 199, this amount *3 is added to Civilization Score.
+5	; Value to the Civilization Score of each future tech researched.
+0	; Penalty assessed to Civilization Score each time player betrays another race.
+0	; Cost to Civilization Score (+ or -) for each unit destroyed.
+11110111	; bitmask for goodie huts, right bit =map0, 0=no goodie huts
+0    ; Helicopters pick up huts 0=no 1=yes
+
+
+@COSMIC2
+EventHeapSize, 106480, 1
+MovementMultipliers, 0
+RailroadMultiplier, 2
+RiverMultiplier, 0
+AlpineMultiplier, 0
+NumberOfUnitTypes, 189

@@ -1,0 +1,39 @@
+- Troop transport by land and flying units - SOLVED by Prof Garfield preemptively
+- Shooting system (the K key) to shoot mortar/ammo/missile
+- Entrenchement mechanic: any possible improvement over basic Fortifying?
+- Creating a bridge on 1 tile of ocean by military engineer?
+- Read idea that flying fight could also need to refuel. That way they serve as escort, only attack once. Can be attacked by ground to air units
+- SAM and manpad system:
+	- IF flying unit within X tiles of range of a SAM system, it looses X hp per tile of movements.
+	- also, they should be able to shoot ground to air actively if they have the chance. Ex: if attacked by a bomber, it should be able to shoot actively towards them too.
+	- Ideally, the SAM unit would only work if fortified (pack/unpack)
+- Support system to think of
+	- IF within range of an outpost, unit can refill its bar. ELSE it never does?
+	- IF this is possible, maybe a General unit could be used as a cheap "morale" booster too
+- Note: the last two ideas are possibly the same code: just using opposite effects on different units. Same pack/unpack system if you want to move the Logistic Depot / General (into a HQ unit/tile) so that if surprised by the ennemy, the first turn after unfortifying the unit should have 0 MP. It would need one turn of unfortifying to pack, and need one turn to pack before it has an effect.
+- cities can't be burned down
+- city named from the west as per NATO standard named "FOB XX" for "Forward Operating Base"
+- city named from the east as per RUS standard named "POB XX" for "Postoyannaya Operativnaya Baza"
+- units are able after the dev of a tech to use, if on Forest, camo. When it does, it has bonus but can only move on forest and by 1?
+- tank can after a dev add anti drone cage improvised. But as per real use, it apparently interferes with normal ops
+- "A Russian tank commander told a journalist that the cages interfered with radio aerials needed for battlefield communications, and made getting in or out of the vehicles -- including in the event of a potential fire -- difficult. “We took them off and threw them away,” he said." SO MAYBE IT SHOULD BE AN OPTION BUT WHEN YOU USE IT, YOU CANT REFILL LIFE AS A NEGATIVE?
+- tech: transforming normal bus into mobile hospital (see crowdfunding by Romanians of Bus Hospitals, check picture)
+- squad teaming up to platoon to Company to Battalion to Regiment to Division
+- Help from Starlink with internet
+
+VERY SPECIAL UNITS
+
+- investigate ability to create Ocean by a settler. it has to be mine/irrigation order not terraform because "The process cannot take more than one turn or the settler wall fall asleep before the job is done". Check terrain editor of MGE and if it's possible to do that in the terraforming (mining) code. Would be nice as the opposite to creating a bridge: the bridging specialist or a military engineer could destroy a bridge using mine or irrigation on the bridge tile to revert to Ocean. Note: it could be a way for russians to create allow russian ships from the east fleet to come to war in the local seas. It would just need to be helped a bit by having some bridge tiles already on the map.
+
+- sea settler could be able to doo that. MAYBE IF A SETTLER HAS A CHARACTERISTIC OF UNIT 3 IT DOESNT CARE AND CAN GO ON THE SEA AND MAKE A BRIDGE ANYWHERE? see "doman three units". Apparently they can Settle. It could be the solution.
+
+"Irrigation and farmland will be lost but roads and railways remain when the land below is changed to sea. Although roads and railways cannot be used for moving purposes, they will still give the normal trade bonuses to nearby cities. In certain cases, like a no road/rail underwater scenario, you can change the look of roads and rail to reflect sea bonuses." INTERESTING BECAUSE IN CIV I I USED TO BREAK THE GAME BY BUILDING ROADS OVER THE SEA ON A TRANSPORT SHIP
+
+- air + carrier check Sleague: if both flags ON: it moves by 1, can't host but does refuel units. = you can create a flying tanker that can refuel planes with say a KC135, a A330 MRTT, a Pegasus KC130, an IL78 for RUS. Russians use the IL78/ 
+
+- air transport
+IL76 for RUS. C17 globemaster/C130 super hercules, airbus A400M soon. These are able to land on noon prepared runway (say: only on Grassland or Plain?). MRTT is not (its an A330). 
+
+- possibility to create turrets: 
+
+- empty unit with "view 2 tiles" to create and kill to reveal a locatioin to a player.
