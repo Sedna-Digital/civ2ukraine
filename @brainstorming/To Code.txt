@@ -21,6 +21,7 @@
 - squad teaming up to platoon to Company to Battalion to Regiment to Division
 - Help from Starlink with internet
 - make Volga-Don canal playable
+- requiring a building to make a unit https://www.youtube.com/watch?v=AILPOVfFNZQ
 
 VERY SPECIAL UNITS
 

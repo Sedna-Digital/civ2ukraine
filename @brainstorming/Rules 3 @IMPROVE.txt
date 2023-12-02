@@ -2,7 +2,7 @@
 Nothing,                  1,  0,    nil,	00000000,	>	Nothing
 Palace,                   10, 0,    Mas,	00000010,	>	Government Center
 Barracks,                 4,  1,    nil,	00000010,	>	Military Academy
-Granary,                  6,  1,    Pot,	00000010,	>	Grain Silo			Useless with Pyramid (Oblasts)
+Granary,                  6,  1,    Pot,	00000010,	>	UN help package			Useless with Pyramid (Oblasts)
 Temple,                   4,  1,    Cer,	00000010,	>	Hospital			Double with: Oracle (Red Cross)
 MarketPlace,              8,  1,    Cur,	00000010,	> 	MarketPlace
 Library,                  8,  1,    Wri,	00000010,	>	School
@@ -25,12 +25,12 @@ Stock Exchange,           16, 4,    Eco,	00000010,	>	Bank
 Sewer System,             12, 2,    San,	00000010,	>	Permit for City
 Supermarket,               8, 3,    Rfg,	00000010,	>	Food Distribution Center
 Superhighways,            20, 5,    Aut,	00000010,	>	Highways
-Research Lab,             16, 3,    Cmp,	00000010,	>	VR Research Lab			Everywhere with SETI (FoldingAtHome)
+Research Lab,             16, 3,    Cmp,	00000010,	>	HiTech Research Lab		Everywhere with SETI (FoldingAtHome)
 SAM Missile Battery,      10, 2,    Roc,	00000010,	>	SAM Defense System
 Coastal Fortress,          8, 1,    Met,	00000010,	>	Coastal Defense Battery
 Solar Plant,              32, 4,    Env,	00000010,	>	Military GigaFactory		HOOVER DAM: ONLY
-Harbor,                   6,  1,    Sea,	00000010,	> 	Fishing Portttt	
-Offshore Platform,        16, 3,    Min,	00000010,	>	Maritime Resource
+Harbor,                   6,  1,    Sea,	00000010,	> 	Fishing Port	
+Offshore Platform,        16, 3,    Min,	00000010,	>	Maritime Resource Center
 Airport,                  16, 3,    Rad,	00000010,	> 	Tactical airstrip
 Police Station,           6,  2,    Cmn,	00000010,	>	Conscription Center
 Port Facility,            8,  3,    Amp,	00000010,	> 	Shipyard
@@ -40,8 +40,8 @@ SS Component,             16, 0,    Pla,
 SS Module,                32, 0,    Sup,
 (Capitalization),         60, 0,    Cor,
 Pyramids,                 20, 0,    Mas,	>	Oblasts
-Hanging Gardens,          20, 0,    Pot,	>	Red Square			for Neutral only
-Colossus,                 20, 0,    Bro,	>	WholeSale Hypermarket
+Hanging Gardens,          20, 0,    Pot,	>	Red Square			in moscow
+Colossus,                 20, 0,    Bro,	>	WholeSale Megamarket
 Lighthouse,               20, 0,    Map,	>	Maritime Surveillance
 Great Library,            30, 0,    Lit,	>	Surveillance			To be obsolete immediately
 Oracle,                   30, 0,    Mys,	> 	Red Cross
