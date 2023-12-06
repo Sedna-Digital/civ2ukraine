@@ -37,3 +37,8 @@ In the case of camouflage, I'd use Lua to replace units with ones of a different
 
 SAM
 Yes, this can be done. Combat stats can be changed based on if a SAM is nearby, or an 'onEnterTile' event might do something to a wandering aircraft.
+
+- support units which allows for replenishment of units within X tiles
+Yes.
+
+You could make a unit for the human player that could change the terrain of an adjacent square to a "bridge", but I'd recommend making that sort of thing event driven instead. If a player's troops hold both sides of the river, there could be an option to build a bridge after a few turns. Then the AI could get it for free if conditions are met. Definitely don't try to use irrigation/mining/domain 3 units; the AI won't do it right.
